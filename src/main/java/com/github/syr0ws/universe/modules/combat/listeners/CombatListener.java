@@ -40,7 +40,7 @@ public class CombatListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDamagePlayer(EntityDamageByEntityEvent event) {
 
-        // if(event.isCancelled()) return;
+        if(event.isCancelled()) return;
 
         Entity damaged = event.getEntity(), damager = event.getDamager();
 
