@@ -2,6 +2,7 @@ package com.github.syr0ws.universe.modules;
 
 import com.github.syr0ws.universe.Game;
 import com.github.syr0ws.universe.listeners.ListenerManager;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public abstract class GameModule implements Module {
 
@@ -21,6 +22,10 @@ public abstract class GameModule implements Module {
 
     public Game getGame() {
         return this.game;
+    }
+
+    public FileConfiguration getConfig() {
+        return this.game.getConfig();
     }
 
     public ListenerManager getListenerManager() {
