@@ -4,7 +4,6 @@ import com.github.syr0ws.universe.Game;
 import com.github.syr0ws.universe.listeners.ListenerManager;
 import com.github.syr0ws.universe.modules.GameModule;
 import com.github.syr0ws.universe.modules.ModuleEnum;
-import com.github.syr0ws.universe.modules.ModuleException;
 import com.github.syr0ws.universe.modules.combat.CombatModule;
 import com.github.syr0ws.universe.modules.combat.CombatTask;
 import com.github.syr0ws.universe.modules.combat.listeners.CombatListener;
@@ -25,7 +24,7 @@ public class DefaultCombatModule extends GameModule implements CombatModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void enable() {
 
         // Handling settings.
         this.settings.init(super.getGame().getConfig());
@@ -39,7 +38,7 @@ public class DefaultCombatModule extends GameModule implements CombatModule {
     }
 
     @Override
-    public void disable() throws ModuleException {
+    public void disable() {
 
         // Handling listeners.
         ListenerManager listenerManager = super.getListenerManager();
