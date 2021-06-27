@@ -3,6 +3,7 @@ package com.github.syr0ws.universe.modules.combat.impl;
 import com.github.syr0ws.universe.Game;
 import com.github.syr0ws.universe.listeners.ListenerManager;
 import com.github.syr0ws.universe.modules.GameModule;
+import com.github.syr0ws.universe.modules.ModuleEnum;
 import com.github.syr0ws.universe.modules.ModuleException;
 import com.github.syr0ws.universe.modules.combat.CombatModule;
 import com.github.syr0ws.universe.modules.combat.CombatTask;
@@ -50,7 +51,7 @@ public class DefaultCombatModule extends GameModule implements CombatModule {
 
     @Override
     public String getName() {
-        return "CombatModule";
+        return ModuleEnum.COMBAT_MODULE.getName();
     }
 
     @Override

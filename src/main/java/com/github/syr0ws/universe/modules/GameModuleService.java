@@ -7,28 +7,38 @@ public class GameModuleService implements ModuleService {
     private final List<Module> modules = new ArrayList<>();
 
     @Override
-    public void enableModule(Module module) throws ModuleException {
+    public void enableModule(Module module)  {
 
         if(this.isEnabled(module.getName()))
-            throw new ModuleException(String.format("Module '%s' is already enabled.", module.getName()));
+            throw new UnsupportedOperationException(String.format("Module '%s' is already enabled.", module.getName()));
 
-        module.enable();
+        try {
 
-        this.modules.add(module);
+            module.enable();
+            this.modules.add(module);
+
+        } catch (ModuleException e) { e.printStackTrace(); }
     }
 
     @Override
-    public void disableModule(String name) throws ModuleException {
+    public void disableModule(String name) {
 
         Optional<Module> optional = this.getModule(name);
 
         if(!optional.isPresent())
-            throw new ModuleException(String.format("Module '%s' is not enabled.", name));
+            throw new UnsupportedOperationException(String.format("Module '%s' is not enabled.", name));
 
         Module module = optional.get();
-        module.disable();
+
+        try { module.disable();
+        } catch (ModuleException e) { e.printStackTrace(); }
 
         this.modules.remove(module);
+    }
+
+    @Override
+    public void disableModules() {
+        this.modules.forEach(module -> this.disableModule(module.getName()));
     }
 
     @Override
