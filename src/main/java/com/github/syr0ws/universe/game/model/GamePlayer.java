@@ -10,6 +10,8 @@ public interface GamePlayer {
 
     String getName();
 
+    Mode getMode();
+
     boolean isOnline();
 
     boolean isPlaying();
