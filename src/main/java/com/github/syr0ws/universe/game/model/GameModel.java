@@ -13,7 +13,7 @@ public interface GameModel extends AttributeObservable {
 
     boolean isWaiting();
 
-    boolean isStarted();
+    boolean isRunning();
 
     boolean isFinished();
 
