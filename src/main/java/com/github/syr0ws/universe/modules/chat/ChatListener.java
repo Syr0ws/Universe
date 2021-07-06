@@ -1,11 +1,10 @@
 package com.github.syr0ws.universe.modules.chat;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.Collection;
 import java.util.Optional;
 
 public class ChatListener implements Listener {
@@ -20,7 +19,7 @@ public class ChatListener implements Listener {
         this.service = service;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
 
         // Always cancelling the event.
@@ -33,15 +32,7 @@ public class ChatListener implements Listener {
                 .filter(chat -> chat.canSend(message))
                 .findFirst();
 
-        if(!optional.isPresent())
-            throw new ChatException("No chat found.");
-
-        Chat chat = optional.get();
-
-        Collection<Player> receivers = chat.getReceivers(message);
-        String format = chat.getFormat(message);
-
-        // Sending message.
-        receivers.forEach(player -> player.sendMessage(format));
+        // If a chat has been found, handling message.
+        optional.ifPresent(chat -> chat.onChat(message));
     }
 }
