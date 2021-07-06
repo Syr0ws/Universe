@@ -15,5 +15,7 @@ public interface ModuleService {
 
     Optional<Module> getModule(String name);
 
+    <T extends Module> Optional<T> getModule(String name, Class<T> clazz);
+
     Collection<Module> getModules();
 }

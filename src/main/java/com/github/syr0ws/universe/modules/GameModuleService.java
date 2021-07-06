@@ -55,6 +55,14 @@ public class GameModuleService implements ModuleService {
     }
 
     @Override
+    public <T extends Module> Optional<T> getModule(String name, Class<T> clazz) {
+        return this.modules.stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .findFirst();
+    }
+
+    @Override
     public Collection<Module> getModules() {
         return Collections.unmodifiableList(this.modules);
     }
