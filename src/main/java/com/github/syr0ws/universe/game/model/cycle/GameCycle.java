@@ -9,6 +9,7 @@ public abstract class GameCycle extends AbstractAttributeObservable {
 
     private final Game game;
     private final ListenerManager listenerManager;
+
     private GameCycleState state;
 
     public GameCycle(Game game) {
@@ -46,6 +47,10 @@ public abstract class GameCycle extends AbstractAttributeObservable {
         this.setState(GameCycleState.STOPPED);
     }
 
+    protected void done() {
+        this.notifyChange(GameCycleAttribute.DONE);
+    }
+
     public Game getGame() {
         return this.game;
     }
@@ -60,6 +65,6 @@ public abstract class GameCycle extends AbstractAttributeObservable {
 
     public enum GameCycleAttribute implements Attribute {
 
-        CYCLE_STATE_CHANGE
+        CYCLE_STATE_CHANGE, DONE;
     }
 }
