@@ -17,6 +17,8 @@ public interface GameModel extends AttributeObservable {
 
     boolean isFinished();
 
+    boolean isStarted();
+
     GamePlayer getPlayer(UUID uuid);
 
     Optional<? extends GamePlayer> getPlayer(String name);
