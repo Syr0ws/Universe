@@ -5,7 +5,6 @@ import com.github.syr0ws.universe.listeners.ListenerManager;
 import com.github.syr0ws.universe.modules.GameModule;
 import com.github.syr0ws.universe.modules.ModuleEnum;
 import com.github.syr0ws.universe.modules.ModuleException;
-import com.github.syr0ws.universe.modules.scoreboard.ScoreboardCreatorManager;
 import com.github.syr0ws.universe.modules.scoreboard.ScoreboardListener;
 import com.github.syr0ws.universe.modules.scoreboard.ScoreboardManager;
 import com.github.syr0ws.universe.modules.scoreboard.ScoreboardModule;
@@ -13,13 +12,11 @@ import com.github.syr0ws.universe.modules.scoreboard.ScoreboardModule;
 public class CraftScoreboardModule extends GameModule implements ScoreboardModule {
 
     private final ScoreboardManager scoreboardManager;
-    private final ScoreboardCreatorManager creatorManager;
 
     public CraftScoreboardModule(Game game) {
         super(game);
 
         this.scoreboardManager = new CraftScoreboardManager();
-        this.creatorManager = new CraftScoreboardCreatorManager();
     }
 
     @Override
@@ -43,10 +40,5 @@ public class CraftScoreboardModule extends GameModule implements ScoreboardModul
     @Override
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;
-    }
-
-    @Override
-    public ScoreboardCreatorManager getScoreboardCreatorManager() {
-        return this.creatorManager;
     }
 }
