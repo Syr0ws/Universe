@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public class ChatListener implements Listener {
 
-    private final ChatService service;
+    private final ChatModel service;
 
-    public ChatListener(ChatService service) {
+    public ChatListener(ChatModel service) {
 
         if(service == null)
-            throw new IllegalArgumentException("ChatService cannot be null.");
+            throw new IllegalArgumentException("ChatModel cannot be null.");
 
         this.service = service;
     }

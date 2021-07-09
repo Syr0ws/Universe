@@ -2,7 +2,7 @@ package com.github.syr0ws.universe.modules.chat;
 
 import java.util.Collection;
 
-public interface ChatService {
+public interface ChatModel {
 
     void registerChat(Chat chat);
 

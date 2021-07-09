@@ -2,14 +2,14 @@ package com.github.syr0ws.universe.modules.chat.impl;
 
 import com.github.syr0ws.universe.modules.chat.Chat;
 import com.github.syr0ws.universe.modules.chat.ChatException;
-import com.github.syr0ws.universe.modules.chat.ChatService;
+import com.github.syr0ws.universe.modules.chat.ChatModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class DefaultChatService implements ChatService {
+public class CraftChatModel implements ChatModel {
 
     private final List<Chat> chats = new ArrayList<>();
 
