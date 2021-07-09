@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CraftScoreboardManager implements ScoreboardManager {
 
@@ -25,8 +26,6 @@ public class CraftScoreboardManager implements ScoreboardManager {
             throw new IllegalArgumentException("Player already have a scoreboard. Remove it first.");
 
         this.scoreboards.put(player, scoreboard);
-
-        scoreboard.set();
     }
 
     @Override
@@ -38,13 +37,17 @@ public class CraftScoreboardManager implements ScoreboardManager {
         if(!this.scoreboards.containsKey(player))
             throw new IllegalArgumentException("Player doesn't have any scoreboard.");
 
-        Scoreboard scoreboard = this.scoreboards.remove(player);
-        scoreboard.remove();
+        this.scoreboards.remove(player);
     }
 
     @Override
     public boolean hasScoreboard(Player player) {
         return this.scoreboards.containsKey(player);
+    }
+
+    @Override
+    public Optional<? extends Scoreboard> getScoreboard(Player player) {
+        return Optional.ofNullable(this.scoreboards.get(player));
     }
 
     @Override

@@ -13,5 +13,7 @@ public interface ScoreboardManager {
 
     boolean hasScoreboard(Player player);
 
+    Optional<? extends Scoreboard> getScoreboard(Player player);
+
     Collection<? extends Scoreboard> getScoreboards();
 }

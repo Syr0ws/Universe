@@ -1,8 +1,10 @@
 package com.github.syr0ws.universe.modules.scoreboard;
 
-public interface ScoreboardModule {
+import com.github.syr0ws.universe.modules.Module;
 
-    ScoreboardManager getScoreboardModel();
+public interface ScoreboardModule extends Module {
+
+    ScoreboardManager getScoreboardManager();
 
     ScoreboardCreatorManager getScoreboardCreatorManager();
 }

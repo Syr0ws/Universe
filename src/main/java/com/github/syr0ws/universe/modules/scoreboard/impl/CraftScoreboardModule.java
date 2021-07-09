@@ -41,7 +41,7 @@ public class CraftScoreboardModule extends GameModule implements ScoreboardModul
     }
 
     @Override
-    public ScoreboardManager getScoreboardModel() {
+    public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;
     }
 
