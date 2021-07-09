@@ -23,6 +23,9 @@ public class ChatListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
 
+        // A cancelled event means that the message must not be sent even if a chat can be used.
+        if(event.isCancelled()) return;
+
         // Always cancelling the event.
         event.setCancelled(true);
 
