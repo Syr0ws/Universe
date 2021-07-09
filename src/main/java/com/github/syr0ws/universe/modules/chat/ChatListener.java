@@ -5,6 +5,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.Comparator;
 import java.util.Optional;
 
 public class ChatListener implements Listener {
@@ -30,7 +31,7 @@ public class ChatListener implements Listener {
         // Finding a chat.
         Optional<Chat> optional = this.service.getChats().stream()
                 .filter(chat -> chat.canSend(message))
-                .findFirst();
+                .max(Comparator.comparingInt(chat -> chat.getPriority().ordinal()));
 
         // If a chat has been found, handling message.
         optional.ifPresent(chat -> chat.onChat(message));

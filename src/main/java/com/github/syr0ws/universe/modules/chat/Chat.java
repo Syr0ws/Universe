@@ -5,4 +5,6 @@ public interface Chat {
     void onChat(ChatMessage message);
 
     boolean canSend(ChatMessage message);
+
+    ChatPriority getPriority();
 }
