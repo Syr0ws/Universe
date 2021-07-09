@@ -4,6 +4,7 @@ import com.github.syr0ws.universe.Game;
 import com.github.syr0ws.universe.modules.border.impl.CraftBorderModule;
 import com.github.syr0ws.universe.modules.chat.impl.CraftChatModule;
 import com.github.syr0ws.universe.modules.combat.impl.DefaultCombatModule;
+import com.github.syr0ws.universe.modules.scoreboard.impl.CraftScoreboardModule;
 
 public enum ModuleEnum {
 
@@ -28,6 +29,14 @@ public enum ModuleEnum {
         @Override
         public Module newInstance(Game game) {
             return new CraftBorderModule(game);
+        }
+    },
+
+    SCOREBOARD_MODULE("ScoreboardModule") {
+
+        @Override
+        public Module newInstance(Game game) {
+            return new CraftScoreboardModule(game);
         }
     };
 
