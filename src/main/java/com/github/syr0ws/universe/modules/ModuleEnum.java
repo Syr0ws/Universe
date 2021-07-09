@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.modules;
 
 import com.github.syr0ws.universe.Game;
-import com.github.syr0ws.universe.modules.border.impl.DefaultBorderModule;
+import com.github.syr0ws.universe.modules.border.impl.CraftBorderModule;
 import com.github.syr0ws.universe.modules.chat.impl.DefaultChatModule;
 import com.github.syr0ws.universe.modules.combat.impl.DefaultCombatModule;
 
@@ -27,7 +27,7 @@ public enum ModuleEnum {
 
         @Override
         public Module newInstance(Game game) {
-            return new DefaultBorderModule(game);
+            return new CraftBorderModule(game);
         }
     };
 
