@@ -12,6 +12,12 @@ public interface Border {
 
     void setCenter(double x, double z, int seconds);
 
+    void setSafeZoneDistance(double distance);
+
+    void setWarningDistance(int distance);
+
+    void setWarningTime(int seconds);
+
     String getWorld();
 
     double getCenterX();
@@ -21,4 +27,10 @@ public interface Border {
     double getSize();
 
     double getDamages();
+
+    double getSafeZoneDistance();
+
+    int getWarningDistance();
+
+    int getWarningTime();
 }

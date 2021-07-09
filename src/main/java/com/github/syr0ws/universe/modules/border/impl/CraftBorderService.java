@@ -1,9 +1,6 @@
 package com.github.syr0ws.universe.modules.border.impl;
 
-import com.github.syr0ws.universe.modules.border.Border;
-import com.github.syr0ws.universe.modules.border.BorderDAO;
-import com.github.syr0ws.universe.modules.border.BorderModel;
-import com.github.syr0ws.universe.modules.border.BorderService;
+import com.github.syr0ws.universe.modules.border.*;
 
 import java.util.Collection;
 
@@ -27,7 +24,11 @@ public class CraftBorderService implements BorderService {
     @Override
     public void loadBorders() {
 
-        Collection<? extends Border> borders = this.dao.loadBorders();
-        borders.forEach(this.model::addBorder);
+        try {
+
+            Collection<? extends Border> borders = this.dao.loadBorders();
+            borders.forEach(this.model::addBorder);
+
+        } catch (BorderException e) { e.printStackTrace(); }
     }
 }

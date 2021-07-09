@@ -51,6 +51,33 @@ public class CraftBorder implements Border {
     }
 
     @Override
+    public void setSafeZoneDistance(double distance) {
+
+        if(distance < 0)
+            throw new IllegalArgumentException("Distance must be positive.");
+
+        this.getWorldBorder().setDamageBuffer(distance);
+    }
+
+    @Override
+    public void setWarningDistance(int distance) {
+
+        if(distance < 0)
+            throw new IllegalArgumentException("Distance must be positive.");
+
+        this.getWorldBorder().setWarningDistance(distance);
+    }
+
+    @Override
+    public void setWarningTime(int seconds) {
+
+        if(seconds < 0)
+            throw new IllegalArgumentException("Number of seconds must be positive.");
+
+        this.getWorldBorder().setWarningTime(seconds);
+    }
+
+    @Override
     public String getWorld() {
         return this.world;
     }
@@ -73,6 +100,21 @@ public class CraftBorder implements Border {
     @Override
     public double getDamages() {
         return this.getWorldBorder().getDamageAmount();
+    }
+
+    @Override
+    public double getSafeZoneDistance() {
+        return this.getWorldBorder().getDamageBuffer();
+    }
+
+    @Override
+    public int getWarningDistance() {
+        return this.getWorldBorder().getWarningDistance();
+    }
+
+    @Override
+    public int getWarningTime() {
+        return this.getWorldBorder().getWarningTime();
     }
 
     private WorldBorder getWorldBorder() {

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface BorderDAO {
 
-    Border loadBorder(String name);
+    Border loadBorder(String name) throws BorderException;
 
-    Collection<? extends Border> loadBorders();
+    Collection<? extends Border> loadBorders() throws BorderException;
 }
