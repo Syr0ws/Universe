@@ -10,6 +10,7 @@ import com.github.syr0ws.universe.modules.combat.events.GamePlayerDeathEvent;
 import com.github.syr0ws.universe.modules.combat.events.GamePlayerRespawnEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -144,11 +145,21 @@ public class CraftCombatService implements CombatService {
         Location location = player.getLocation();
         World world = location.getWorld();
 
-        // Dropping items.
-        event.getDrops().forEach(drop -> world.dropItemNaturally(location, drop));
+        // Handling item drop.
+        event.getDrops().stream()
+                .filter(drop -> drop != null && drop.getType() != Material.AIR)
+                .forEach(drop -> world.dropItem(location, drop));
 
-        // Dropping experience.
-        ExperienceOrb orb = world.spawn(location, ExperienceOrb.class);
-        orb.setExperience(event.getDroppedExp());
+        // Handling experience drop.
+        int experience = event.getDroppedExp();
+
+        // Checking that the amount of experience is strictly positive.
+        // Indeed, even if this check isn't made and the amount is 0, an
+        // experience orb will spawn anyway.
+        if(experience > 0) {
+
+            ExperienceOrb orb = world.spawn(location, ExperienceOrb.class);
+            orb.setExperience(event.getDroppedExp());
+        }
     }
 }
