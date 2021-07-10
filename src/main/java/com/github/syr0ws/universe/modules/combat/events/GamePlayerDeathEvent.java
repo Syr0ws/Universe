@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlayerDeathEvent extends PlayerEvent {
+public class GamePlayerDeathEvent extends PlayerEvent {
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();
 
@@ -19,7 +19,7 @@ public class PlayerDeathEvent extends PlayerEvent {
 
     private final List<ItemStack> drops;
 
-    public PlayerDeathEvent(Player player) {
+    public GamePlayerDeathEvent(Player player) {
         super(player);
 
         PlayerInventory inventory = player.getInventory();

@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-public class PlayerRespawnEvent extends PlayerEvent {
+public class GamePlayerRespawnEvent extends PlayerEvent {
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();
 
     private Location respawn;
 
-    public PlayerRespawnEvent(Player player) {
+    public GamePlayerRespawnEvent(Player player) {
         super(player);
         this.respawn = player.getWorld().getSpawnLocation();
     }

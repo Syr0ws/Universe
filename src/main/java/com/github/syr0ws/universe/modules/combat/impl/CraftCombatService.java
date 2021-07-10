@@ -6,8 +6,8 @@ import com.github.syr0ws.universe.modules.combat.CombatService;
 import com.github.syr0ws.universe.modules.combat.Hit;
 import com.github.syr0ws.universe.modules.combat.events.CombatStartEvent;
 import com.github.syr0ws.universe.modules.combat.events.CombatStopEvent;
-import com.github.syr0ws.universe.modules.combat.events.PlayerDeathEvent;
-import com.github.syr0ws.universe.modules.combat.events.PlayerRespawnEvent;
+import com.github.syr0ws.universe.modules.combat.events.GamePlayerDeathEvent;
+import com.github.syr0ws.universe.modules.combat.events.GamePlayerRespawnEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -37,7 +37,7 @@ public class CraftCombatService implements CombatService {
         this.stopCombat(player);
 
         // Throwing an event.
-        PlayerDeathEvent event = new PlayerDeathEvent(player);
+        GamePlayerDeathEvent event = new GamePlayerDeathEvent(player);
         Bukkit.getPluginManager().callEvent(event);
 
         // Handling event.
@@ -94,7 +94,7 @@ public class CraftCombatService implements CombatService {
     private void handleRespawn(Player player) {
 
         // Throwing an event.
-        PlayerRespawnEvent event = new PlayerRespawnEvent(player);
+        GamePlayerRespawnEvent event = new GamePlayerRespawnEvent(player);
         Bukkit.getPluginManager().callEvent(event);
 
         Location respawn = event.getRespawnLocation();
@@ -102,7 +102,7 @@ public class CraftCombatService implements CombatService {
         player.teleport(respawn);
     }
 
-    private void handleInventory(PlayerDeathEvent event) {
+    private void handleInventory(GamePlayerDeathEvent event) {
 
         Player player = event.getPlayer();
 
@@ -112,7 +112,7 @@ public class CraftCombatService implements CombatService {
         player.getInventory().clear();
     }
 
-    private void handlePotionEffects(PlayerDeathEvent event) {
+    private void handlePotionEffects(GamePlayerDeathEvent event) {
 
         Player player = event.getPlayer();
 
@@ -124,7 +124,7 @@ public class CraftCombatService implements CombatService {
                 .forEach(effect -> player.removePotionEffect(effect.getType()));
     }
 
-    private void handleExp(PlayerDeathEvent event) {
+    private void handleExp(GamePlayerDeathEvent event) {
 
         Player player = event.getPlayer();
 
@@ -136,7 +136,7 @@ public class CraftCombatService implements CombatService {
         player.setLevel(0);
     }
 
-    private void handleDrops(PlayerDeathEvent event) {
+    private void handleDrops(GamePlayerDeathEvent event) {
 
         Player player = event.getPlayer();
 
