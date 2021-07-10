@@ -33,8 +33,9 @@ public class CraftCombatService implements CombatService {
     @Override
     public void die(Player player) {
 
-        // Removing the player from combat.
-        this.stopCombat(player);
+        // If the player is in combat, stopping it.
+        // A player isn't necessary in combat as death can be due to several causes.
+        if(this.model.isInCombat(player)) this.stopCombat(player);
 
         // Throwing an event.
         GamePlayerDeathEvent event = new GamePlayerDeathEvent(player);
