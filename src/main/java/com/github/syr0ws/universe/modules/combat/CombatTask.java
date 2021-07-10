@@ -1,42 +1,53 @@
 package com.github.syr0ws.universe.modules.combat;
 
-import com.github.syr0ws.universe.modules.combat.impl.DefaultCombatModule;
-import com.github.syr0ws.universe.modules.combat.impl.DefaultCombatService;
-import com.github.syr0ws.universe.modules.combat.settings.DefaultCombatSettings;
+import com.github.syr0ws.universe.Game;
+import com.github.syr0ws.universe.modules.combat.impl.CraftCombatModule;
+import com.github.syr0ws.universe.modules.combat.impl.CraftCombatService;
+import com.github.syr0ws.universe.modules.combat.settings.CombatSettings;
+import com.github.syr0ws.universe.modules.combat.settings.CraftCombatSettings;
 import com.github.syr0ws.universe.tools.Task;
 
 import java.util.ArrayList;
 
 public class CombatTask extends Task {
 
-    private final DefaultCombatModule module;
+    private final Game game;
+    private final CombatModel model;
+    private final CombatService service;
 
-    public CombatTask(DefaultCombatModule module) {
+    public CombatTask(Game game, CombatModel model, CombatService service) {
 
-        if(module == null)
-            throw new IllegalArgumentException("Module cannot be null.");
+        if(game == null)
+            throw new IllegalArgumentException("Game cannot be null.");
 
-        this.module = module;
+        if(model == null)
+            throw new IllegalArgumentException("CombatModel cannot be null.");
+
+        if(service == null)
+            throw new IllegalArgumentException("CombatService cannot be null.");
+
+        this.game = game;
+        this.model = model;
+        this.service = service;
     }
 
     @Override
     public void start() {
         super.start();
-        super.runTaskTimer(this.module.getGame(), 0L, 20L);
+        super.runTaskTimer(this.game, 0L, 20L);
     }
 
     @Override
     public void run() {
 
-        // Variables.
-        DefaultCombatService service = this.module.getService();
-        DefaultCombatSettings settings = this.module.getSettings();
+        // Retrieving settings.
+        CombatSettings settings = this.model.getSettings();
 
         // The duration of a combat is seconds.
         long duration = settings.getCombatDurationSetting().getValue();
 
         // Stopping expired combats.
-        new ArrayList<>(service.getCombats()).stream()
+        new ArrayList<>(this.model.getCombats()).stream()
                 .filter(combat -> this.isExpired(combat, duration))
                 .forEach(combat -> service.stopCombat(combat.getPlayer()));
     }

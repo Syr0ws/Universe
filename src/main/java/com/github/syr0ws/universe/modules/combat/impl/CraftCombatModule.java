@@ -4,23 +4,26 @@ import com.github.syr0ws.universe.Game;
 import com.github.syr0ws.universe.listeners.ListenerManager;
 import com.github.syr0ws.universe.modules.GameModule;
 import com.github.syr0ws.universe.modules.ModuleEnum;
+import com.github.syr0ws.universe.modules.combat.CombatModel;
 import com.github.syr0ws.universe.modules.combat.CombatModule;
 import com.github.syr0ws.universe.modules.combat.CombatTask;
 import com.github.syr0ws.universe.modules.combat.listeners.CombatListener;
-import com.github.syr0ws.universe.modules.combat.settings.DefaultCombatSettings;
+import com.github.syr0ws.universe.modules.combat.settings.CraftCombatSettings;
 
-public class DefaultCombatModule extends GameModule implements CombatModule {
+public class CraftCombatModule extends GameModule implements CombatModule {
 
-    private final DefaultCombatService service;
-    private final DefaultCombatSettings settings;
+    private final CraftCombatModel model;
+    private final CraftCombatService service;
+    private final CraftCombatSettings settings;
     private final CombatTask task;
 
-    public DefaultCombatModule(Game game) {
+    public CraftCombatModule(Game game) {
         super(game);
 
-        this.service = new DefaultCombatService();
-        this.settings = new DefaultCombatSettings();
-        this.task = new CombatTask(this);
+        this.settings = new CraftCombatSettings();
+        this.model = new CraftCombatModel(this.settings);
+        this.service = new CraftCombatService(this.model);
+        this.task = new CombatTask(this.getGame(), this.model, this.service);
     }
 
     @Override
@@ -31,7 +34,7 @@ public class DefaultCombatModule extends GameModule implements CombatModule {
 
         // Handling listeners.
         ListenerManager listenerManager = super.getListenerManager();
-        listenerManager.addListener(new CombatListener(this.service));
+        listenerManager.addListener(new CombatListener(this.model, this.service));
 
         // Handling task.
         this.task.start();
@@ -54,12 +57,12 @@ public class DefaultCombatModule extends GameModule implements CombatModule {
     }
 
     @Override
-    public DefaultCombatService getService() {
-        return this.service;
+    public CombatModel getCombatModel() {
+        return this.model;
     }
 
     @Override
-    public DefaultCombatSettings getSettings() {
-        return this.settings;
+    public CraftCombatService getCombatService() {
+        return this.service;
     }
 }

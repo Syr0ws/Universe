@@ -11,7 +11,7 @@ public abstract class CombatEvent extends Event {
     public CombatEvent(Combat combat) {
 
         if(combat == null)
-            throw new IllegalArgumentException("PlayerCombat cannot be null.");
+            throw new IllegalArgumentException("CraftCombat cannot be null.");
 
         this.combat = combat;
     }

@@ -9,13 +9,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class PlayerCombat implements Combat {
+public class CraftCombat implements Combat {
 
     private final Player player;
     private final List<Hit> hits;
     private long lastDamageTime;
 
-    public PlayerCombat(Player player) {
+    public CraftCombat(Player player) {
 
         if(player == null)
             throw new IllegalArgumentException("Player cannot be null.");
