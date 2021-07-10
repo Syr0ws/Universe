@@ -143,8 +143,10 @@ public class CraftCombatService implements CombatService {
         Location location = player.getLocation();
         World world = location.getWorld();
 
+        // Dropping items.
         event.getDrops().forEach(drop -> world.dropItemNaturally(location, drop));
 
+        // Dropping experience.
         ExperienceOrb orb = world.spawn(location, ExperienceOrb.class);
         orb.setExperience(event.getDroppedExp());
     }

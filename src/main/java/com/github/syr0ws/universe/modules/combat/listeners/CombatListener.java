@@ -84,17 +84,21 @@ public class CombatListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDamage(EntityDamageEvent event) {
 
+        // If the event is cancelled, no damage is applied.
         if(event.isCancelled()) return;
 
         Entity damaged = event.getEntity();
 
+        // Only players are interesting us.
         if(!(damaged instanceof Player)) return;
 
         Player player = (Player) damaged;
 
+        // Final damage includes damage reduction.
         double damages = event.getFinalDamage();
         double health = player.getHealth();
 
+        // If damages >= health, killing the player.
         if(damages >= health) this.service.die(player);
     }
 
