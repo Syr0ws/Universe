@@ -98,8 +98,14 @@ public class CombatListener implements Listener {
         double damages = event.getFinalDamage();
         double health = player.getHealth();
 
-        // If damages >= health, killing the player.
-        if(damages >= health) this.service.die(player);
+        if(damages >= health) {
+
+            // Cancelling the damage to simulate a "fake death".
+            event.setCancelled(true);
+
+            // Killing the player.
+            this.service.die(player);
+        }
     }
 
     private boolean isPlayer(Entity entity) {
