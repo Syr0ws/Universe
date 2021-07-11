@@ -34,7 +34,7 @@ public class CombatListener implements Listener {
         this.service = service;
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerQuit(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
@@ -49,7 +49,7 @@ public class CombatListener implements Listener {
         Bukkit.getPluginManager().callEvent(combatDisconnectionEvent);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onCombatDisconnection(CombatDisconnectionEvent event) {
 
         Player player = event.getPlayer();
@@ -61,7 +61,7 @@ public class CombatListener implements Listener {
         if(setting.getValue()) this.service.die(player);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerDamagePlayer(EntityDamageByEntityEvent event) {
 
         if(event.isCancelled()) return;
@@ -81,7 +81,7 @@ public class CombatListener implements Listener {
         this.service.onHit(damagedPlayer, hit);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerDamage(EntityDamageEvent event) {
 
         // If the event is cancelled, no damage is applied.
