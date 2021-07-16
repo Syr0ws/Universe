@@ -2,7 +2,7 @@ package com.github.syr0ws.universe.modules.lang.config;
 
 import com.github.syr0ws.universe.modules.lang.messages.Message;
 import com.github.syr0ws.universe.modules.lang.messages.MessageLoader;
-import com.github.syr0ws.universe.modules.lang.messages.impl.TextMessage;
+import com.github.syr0ws.universe.modules.lang.messages.impl.Text;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class ConfigTextMessageLoader implements MessageLoader {
@@ -20,7 +20,7 @@ public class ConfigTextMessageLoader implements MessageLoader {
     @Override
     public Message load(String key) {
         String text = this.config.getString(key);
-        return new TextMessage(text);
+        return new Text(text);
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.github.syr0ws.universe.modules.lang.messages.impl;
 
+import com.github.syr0ws.universe.modules.lang.messages.Message;
+import com.github.syr0ws.universe.placeholders.PlaceholderContainer;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextList extends Text {
+public class TextList extends PlaceholderContainer implements Message {
 
     private final List<String> list;
 
