@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.displays.impl;
+package com.github.syr0ws.universe.displays.types;
 
 import com.github.syr0ws.universe.modules.lang.LangService;
 import com.github.syr0ws.universe.tools.Reflection;

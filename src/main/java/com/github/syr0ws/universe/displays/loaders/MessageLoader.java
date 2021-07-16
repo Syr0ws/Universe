@@ -2,7 +2,7 @@ package com.github.syr0ws.universe.displays.loaders;
 
 import com.github.syr0ws.universe.displays.Display;
 import com.github.syr0ws.universe.displays.DisplayLoader;
-import com.github.syr0ws.universe.displays.impl.Message;
+import com.github.syr0ws.universe.displays.types.Message;
 import com.github.syr0ws.universe.modules.lang.LangService;
 import org.bukkit.configuration.ConfigurationSection;
 

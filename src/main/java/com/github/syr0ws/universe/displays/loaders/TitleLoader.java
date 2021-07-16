@@ -2,9 +2,9 @@ package com.github.syr0ws.universe.displays.loaders;
 
 import com.github.syr0ws.universe.displays.Display;
 import com.github.syr0ws.universe.displays.DisplayLoader;
-import com.github.syr0ws.universe.displays.impl.LegacyTitle;
-import com.github.syr0ws.universe.displays.impl.NewTitle;
-import com.github.syr0ws.universe.displays.impl.Title;
+import com.github.syr0ws.universe.displays.types.LegacyTitle;
+import com.github.syr0ws.universe.displays.types.NewTitle;
+import com.github.syr0ws.universe.displays.types.Title;
 import com.github.syr0ws.universe.modules.lang.LangService;
 import com.github.syr0ws.universe.tools.Version;
 import org.bukkit.configuration.ConfigurationSection;
