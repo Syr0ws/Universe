@@ -1,38 +1,18 @@
 package com.github.syr0ws.universe.displays;
 
-import com.github.syr0ws.universe.displays.loaders.ActionBarLoader;
-import com.github.syr0ws.universe.displays.loaders.MessageLoader;
-import com.github.syr0ws.universe.displays.loaders.SoundLoader;
-import com.github.syr0ws.universe.displays.loaders.TitleLoader;
+import com.github.syr0ws.universe.displays.Display;
+import com.github.syr0ws.universe.displays.DisplayLoader;
 import org.bukkit.configuration.ConfigurationSection;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class DisplayFactory {
+public interface DisplayFactory {
 
-    private static final Map<String, DisplayLoader> DISPLAY_LOADERS = new HashMap<>();
+    Display getDisplay(ConfigurationSection section);
 
-    static {
-        DISPLAY_LOADERS.put("MESSAGE", new MessageLoader());
-        DISPLAY_LOADERS.put("SOUND", new SoundLoader());
-        DISPLAY_LOADERS.put("TITLE", new TitleLoader());
-        DISPLAY_LOADERS.put("ACTION_BAR", new ActionBarLoader());
-    }
+    void registerLoader(String type, DisplayLoader loader);
 
-    public static Display getDisplay(ConfigurationSection section) {
+    void unregisterLoader(String type);
 
-        String type = section.getString("type").toUpperCase();
-
-        if(!DISPLAY_LOADERS.containsKey(type))
-            throw new IllegalArgumentException(String.format("No loader found for type '%s'.", type));
-
-        DisplayLoader loader = DISPLAY_LOADERS.get(type);
-
-        return loader.load(section);
-    }
-
-    public static void registerLoader(String type, DisplayLoader loader) {
-        DISPLAY_LOADERS.put(type.toUpperCase(), loader);
-    }
+    Map<String, DisplayLoader> getLoaders();
 }

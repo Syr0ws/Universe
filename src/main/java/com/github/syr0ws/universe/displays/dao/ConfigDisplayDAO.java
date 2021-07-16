@@ -11,13 +11,18 @@ import java.util.List;
 
 public class ConfigDisplayDAO implements DisplayDAO {
 
+    private final DisplayFactory factory;
     private final ConfigurationSection section;
 
-    public ConfigDisplayDAO(ConfigurationSection section) {
+    public ConfigDisplayDAO(DisplayFactory factory, ConfigurationSection section) {
+
+        if(factory == null)
+            throw new IllegalArgumentException("DisplayFactory cannot be null.");
 
         if(section == null)
             throw new IllegalArgumentException("ConfigurationSection cannot be null.");
 
+        this.factory = factory;
         this.section = section;
     }
 
@@ -29,7 +34,7 @@ public class ConfigDisplayDAO implements DisplayDAO {
         if(section == null)
             throw new DisplayException(String.format("No display section found at '%s.%s'.", this.section.getName(), path));
 
-        return DisplayFactory.getDisplay(section);
+        return this.factory.getDisplay(section);
     }
 
     @Override
@@ -49,7 +54,7 @@ public class ConfigDisplayDAO implements DisplayDAO {
             if(displaySection == null)
                 throw new DisplayException(String.format("Invalid display section found at '%s.%s'.", section.getCurrentPath(), key));
 
-            Display display = DisplayFactory.getDisplay(displaySection);
+            Display display = this.factory.getDisplay(displaySection);
 
             displays.add(display);
         }

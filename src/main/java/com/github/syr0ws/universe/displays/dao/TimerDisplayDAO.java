@@ -2,6 +2,7 @@ package com.github.syr0ws.universe.displays.dao;
 
 import com.github.syr0ws.universe.displays.Display;
 import com.github.syr0ws.universe.displays.DisplayException;
+import com.github.syr0ws.universe.displays.DisplayFactory;
 import com.github.syr0ws.universe.tools.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -11,8 +12,8 @@ import java.util.Map;
 
 public class TimerDisplayDAO extends ConfigDisplayDAO {
 
-    public TimerDisplayDAO(ConfigurationSection section) {
-        super(section);
+    public TimerDisplayDAO(DisplayFactory factory, ConfigurationSection section) {
+        super(factory, section);
     }
 
     public Map<Integer, Collection<Display>> getTimeDisplays(String path) throws DisplayException {
