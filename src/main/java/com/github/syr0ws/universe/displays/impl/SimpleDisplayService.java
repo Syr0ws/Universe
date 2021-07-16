@@ -1,8 +1,10 @@
 package com.github.syr0ws.universe.displays.impl;
 
 import com.github.syr0ws.universe.displays.Display;
+import com.github.syr0ws.universe.displays.DisplayException;
 import com.github.syr0ws.universe.displays.DisplayFactory;
 import com.github.syr0ws.universe.displays.DisplayService;
+import com.github.syr0ws.universe.displays.dao.DisplayDAO;
 import com.github.syr0ws.universe.displays.loaders.ActionBarLoader;
 import com.github.syr0ws.universe.displays.loaders.MessageLoader;
 import com.github.syr0ws.universe.displays.loaders.SoundLoader;
@@ -13,16 +15,22 @@ import java.util.*;
 
 public class SimpleDisplayService implements DisplayService {
 
+    private final DisplayDAO dao;
     private final DisplayFactory factory;
     private final LangService service;
 
     private final Map<String, List<Display>> displays = new HashMap<>();
 
-    public SimpleDisplayService() {
-        this(null);
+    public SimpleDisplayService(DisplayDAO dao) {
+        this(dao, null);
     }
 
-    public SimpleDisplayService(LangService service) {
+    public SimpleDisplayService(DisplayDAO dao, LangService service) {
+
+        if(dao == null)
+            throw new IllegalArgumentException("DisplayDAO cannot be null.");
+
+        this.dao = dao;
         this.factory = new SimpleDisplayFactory();
         this.service = service;
 
@@ -31,7 +39,32 @@ public class SimpleDisplayService implements DisplayService {
     }
 
     @Override
-    public void registerDisplay(String key, Display display) {
+    public void loadDisplays(String path) {
+
+        try {
+
+            Collection<Display> displays = this.dao.getDisplays(path);
+            this.registerDisplays(path, displays);
+
+        } catch (DisplayException e) { e.printStackTrace(); }
+    }
+
+    @Override
+    public void loadDisplays(Collection<String> paths) {
+
+        for(String path : paths) {
+
+            try {
+
+                Collection<Display> displays = this.dao.getDisplays(path);
+                this.registerDisplays(path, displays);
+
+            } catch (DisplayException e) { e.printStackTrace(); }
+        }
+    }
+
+    @Override
+    public void registerDisplays(String key, Display display) {
 
         key = getKey(key);
 
@@ -45,7 +78,7 @@ public class SimpleDisplayService implements DisplayService {
     }
 
     @Override
-    public void registerDisplay(String key, Collection<Display> displays) {
+    public void registerDisplays(String key, Collection<Display> displays) {
 
         if(displays == null)
             throw new IllegalArgumentException("Collection cannot be null.");

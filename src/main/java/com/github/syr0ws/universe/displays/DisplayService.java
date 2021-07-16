@@ -4,9 +4,13 @@ import java.util.Collection;
 
 public interface DisplayService {
 
-    void registerDisplay(String key, Display display);
+    void loadDisplays(String path);
 
-    void registerDisplay(String key, Collection<Display> displays);
+    void loadDisplays(Collection<String> paths);
+
+    void registerDisplays(String key, Display display);
+
+    void registerDisplays(String key, Collection<Display> displays);
 
     void unregisterDisplay(String key);
 
