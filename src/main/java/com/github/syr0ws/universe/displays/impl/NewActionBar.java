@@ -1,5 +1,6 @@
 package com.github.syr0ws.universe.displays.impl;
 
+import com.github.syr0ws.universe.modules.lang.LangService;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -10,6 +11,10 @@ public class NewActionBar extends ActionBar {
 
     public NewActionBar(String text) {
         super(text);
+    }
+
+    public NewActionBar(LangService service, String text) {
+        super(service, text);
     }
 
     @Override

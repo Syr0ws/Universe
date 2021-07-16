@@ -5,12 +5,23 @@ import com.github.syr0ws.universe.displays.DisplayLoader;
 import com.github.syr0ws.universe.displays.impl.LegacyTitle;
 import com.github.syr0ws.universe.displays.impl.NewTitle;
 import com.github.syr0ws.universe.displays.impl.Title;
+import com.github.syr0ws.universe.modules.lang.LangService;
 import com.github.syr0ws.universe.tools.Version;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class TitleLoader implements DisplayLoader {
 
     private static final Version VERSION = new Version();
+
+    private final LangService service;
+
+    public TitleLoader() {
+        this.service = null;
+    }
+
+    public TitleLoader(LangService service) {
+        this.service = service;
+    }
 
     @Override
     public Display load(ConfigurationSection section) {
@@ -22,6 +33,8 @@ public class TitleLoader implements DisplayLoader {
         int stay = section.getInt("stay", Title.DEFAULT_STAY);
         int fadeOut = section.getInt("fade-out", Title.DEFAULT_FADE_OUT);
 
-        return VERSION.isLegacy() ? new LegacyTitle(title, subtitle, fadeIn, stay, fadeOut) : new NewTitle(title, subtitle, fadeIn, stay, fadeOut);
+        return VERSION.isLegacy() ?
+                new LegacyTitle(this.service, title, subtitle, fadeIn, stay, fadeOut) :
+                new NewTitle(this.service, title, subtitle, fadeIn, stay, fadeOut);
     }
 }

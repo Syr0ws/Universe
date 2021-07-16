@@ -1,5 +1,6 @@
 package com.github.syr0ws.universe.displays.impl;
 
+import com.github.syr0ws.universe.modules.lang.LangService;
 import com.github.syr0ws.universe.tools.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,6 +12,10 @@ public class LegacyActionBar extends ActionBar {
 
     public LegacyActionBar(String text) {
         super(text);
+    }
+
+    public LegacyActionBar(LangService service, String text) {
+        super(service, text);
     }
 
     @Override

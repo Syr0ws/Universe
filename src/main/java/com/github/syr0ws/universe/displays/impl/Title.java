@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.displays.impl;
 
-import com.github.syr0ws.universe.displays.TextDisplay;
+import com.github.syr0ws.universe.modules.lang.LangService;
 
 public abstract class Title extends TextDisplay {
 
@@ -12,21 +12,19 @@ public abstract class Title extends TextDisplay {
     private final int fadeIn, fadeOut, stay;
 
     public Title(String title, String subtitle) {
-
-        if(title == null)
-            throw new IllegalArgumentException("Title cannot be null.");
-
-        if(subtitle == null)
-            throw new IllegalArgumentException("Subtitle cannot be null.");
-
-        this.title = title;
-        this.subtitle = subtitle;
-        this.fadeIn = DEFAULT_FADE_IN;
-        this.stay = DEFAULT_STAY;
-        this.fadeOut = DEFAULT_FADE_OUT;
+        this(null, title, subtitle);
     }
 
     public Title(String title, String subtitle, int fadeIn, int stay, int fadeOut) {
+        this(null, title, subtitle, fadeIn, stay, fadeOut);
+    }
+
+    public Title(LangService service, String title, String subtitle) {
+        this(service, title, subtitle, DEFAULT_FADE_IN, DEFAULT_STAY, DEFAULT_FADE_OUT);
+    }
+
+    public Title(LangService service, String title, String subtitle, int fadeIn, int stay, int fadeOut) {
+        super(service);
 
         if(title == null)
             throw new IllegalArgumentException("Title cannot be null.");
