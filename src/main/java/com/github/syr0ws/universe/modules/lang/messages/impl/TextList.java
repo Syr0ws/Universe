@@ -19,6 +19,6 @@ public class TextList extends PlaceholderContainer implements Message {
     }
 
     public List<String> getList() {
-        return this.list.stream().map(super::format).collect(Collectors.toList());
+        return this.list.stream().map(this::format).collect(Collectors.toList());
     }
 }
