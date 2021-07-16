@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.displays.placeholders;
+package com.github.syr0ws.universe.placeholders;
 
 public enum PlaceholderEnum implements Placeholder {
 
