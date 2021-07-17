@@ -30,4 +30,8 @@ public abstract class AbstractScoreboard implements Scoreboard {
     public void remove() {
         this.manager.removeScoreboard(this.player);
     }
+
+    public Player getPlayer() {
+        return this.player;
+    }
 }
