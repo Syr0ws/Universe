@@ -1,8 +1,9 @@
 package com.github.syr0ws.universe.displays;
 
 import java.util.Collection;
+import java.util.Map;
 
-public interface DisplayService {
+public interface DisplayManager {
 
     void loadDisplays(String path);
 
@@ -16,7 +17,5 @@ public interface DisplayService {
 
     Collection<Display> getDisplays(String key);
 
-    Collection<String> getKeys();
-
-    DisplayFactory getDisplayFactory();
+    Map<String, Collection<Display>> getDisplays();
 }

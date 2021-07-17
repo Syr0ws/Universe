@@ -2,40 +2,23 @@ package com.github.syr0ws.universe.displays.impl;
 
 import com.github.syr0ws.universe.displays.Display;
 import com.github.syr0ws.universe.displays.DisplayException;
-import com.github.syr0ws.universe.displays.DisplayFactory;
-import com.github.syr0ws.universe.displays.DisplayService;
+import com.github.syr0ws.universe.displays.DisplayManager;
 import com.github.syr0ws.universe.displays.dao.DisplayDAO;
-import com.github.syr0ws.universe.displays.loaders.ActionBarLoader;
-import com.github.syr0ws.universe.displays.loaders.MessageLoader;
-import com.github.syr0ws.universe.displays.loaders.SoundLoader;
-import com.github.syr0ws.universe.displays.loaders.TitleLoader;
-import com.github.syr0ws.universe.modules.lang.LangService;
 
 import java.util.*;
 
-public class SimpleDisplayService implements DisplayService {
+public class SimpleDisplayManager implements DisplayManager {
 
     private final DisplayDAO dao;
-    private final DisplayFactory factory;
-    private final LangService service;
 
     private final Map<String, List<Display>> displays = new HashMap<>();
 
-    public SimpleDisplayService(DisplayDAO dao) {
-        this(dao, null);
-    }
-
-    public SimpleDisplayService(DisplayDAO dao, LangService service) {
+    public SimpleDisplayManager(DisplayDAO dao) {
 
         if(dao == null)
             throw new IllegalArgumentException("DisplayDAO cannot be null.");
 
         this.dao = dao;
-        this.factory = new SimpleDisplayFactory();
-        this.service = service;
-
-        // Registering loaders.
-        this.registerLoaders();
     }
 
     @Override
@@ -104,13 +87,8 @@ public class SimpleDisplayService implements DisplayService {
     }
 
     @Override
-    public Collection<String> getKeys() {
-        return this.displays.keySet();
-    }
-
-    @Override
-    public DisplayFactory getDisplayFactory() {
-        return this.factory;
+    public Map<String, Collection<Display>> getDisplays() {
+        return Collections.unmodifiableMap(this.displays);
     }
 
     private String getKey(String key) {
@@ -119,12 +97,5 @@ public class SimpleDisplayService implements DisplayService {
             throw new IllegalArgumentException("Key cannot be null.");
 
         return key.toLowerCase();
-    }
-
-    private void registerLoaders() {
-        this.factory.registerLoader("MESSAGE", new MessageLoader(this.service));
-        this.factory.registerLoader("TITLE", new TitleLoader(this.service));
-        this.factory.registerLoader("ACTION_BAR", new ActionBarLoader(this.service));
-        this.factory.registerLoader("SOUND", new SoundLoader());
     }
 }

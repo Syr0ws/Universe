@@ -3,6 +3,12 @@ package com.github.syr0ws.universe.displays.dao;
 import com.github.syr0ws.universe.displays.Display;
 import com.github.syr0ws.universe.displays.DisplayException;
 import com.github.syr0ws.universe.displays.DisplayFactory;
+import com.github.syr0ws.universe.displays.impl.SimpleDisplayFactory;
+import com.github.syr0ws.universe.displays.loaders.ActionBarLoader;
+import com.github.syr0ws.universe.displays.loaders.MessageLoader;
+import com.github.syr0ws.universe.displays.loaders.SoundLoader;
+import com.github.syr0ws.universe.displays.loaders.TitleLoader;
+import com.github.syr0ws.universe.modules.lang.LangService;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
@@ -11,13 +17,10 @@ import java.util.List;
 
 public class ConfigDisplayDAO implements DisplayDAO {
 
-    private final DisplayFactory factory;
     private final ConfigurationSection section;
+    private final DisplayFactory factory;
 
     public ConfigDisplayDAO(DisplayFactory factory, ConfigurationSection section) {
-
-        if(factory == null)
-            throw new IllegalArgumentException("DisplayFactory cannot be null.");
 
         if(section == null)
             throw new IllegalArgumentException("ConfigurationSection cannot be null.");
@@ -59,9 +62,5 @@ public class ConfigDisplayDAO implements DisplayDAO {
             displays.add(display);
         }
         return displays;
-    }
-
-    public ConfigurationSection getSection() {
-        return this.section;
     }
 }
