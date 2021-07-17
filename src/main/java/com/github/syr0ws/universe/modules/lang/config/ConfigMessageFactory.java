@@ -19,7 +19,7 @@ public class ConfigMessageFactory implements MessageFactory {
             throw new IllegalArgumentException("FileConfiguration cannot be null.");
 
         // Adding loaders.
-        this.loaders.add(new ConfigTextListLoader(config));
+        this.loaders.add(new ConfigTextMessageLoader(config));
         this.loaders.add(new ConfigTextListLoader(config));
     }
 
