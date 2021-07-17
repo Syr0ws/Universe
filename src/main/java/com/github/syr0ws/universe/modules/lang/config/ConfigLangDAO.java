@@ -45,7 +45,7 @@ public class ConfigLangDAO implements LangDAO {
 
         ConfigMessageFactory factory = new ConfigMessageFactory(config);
 
-        for(String key : config.getKeys(false)) {
+        for(String key : config.getKeys(true)) {
 
             Optional<Message> optional = factory.getMessage(key);
             optional.ifPresent(message -> messages.put(key.toLowerCase(), message));
