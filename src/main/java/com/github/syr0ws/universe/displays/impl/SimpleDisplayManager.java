@@ -57,7 +57,7 @@ public class SimpleDisplayManager implements DisplayManager {
         List<Display> displays = this.displays.getOrDefault(key, new ArrayList<>());
         displays.add(display);
 
-        this.displays.replace(key, displays);
+        this.displays.put(key, displays);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class SimpleDisplayManager implements DisplayManager {
         List<Display> list = this.displays.getOrDefault(key, new ArrayList<>());
         list.addAll(displays);
 
-        this.displays.replace(key, list);
+        this.displays.put(key, list);
     }
 
     @Override
