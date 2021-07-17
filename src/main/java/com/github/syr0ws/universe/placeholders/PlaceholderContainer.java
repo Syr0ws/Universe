@@ -29,6 +29,14 @@ public class PlaceholderContainer {
         this.placeholders.put(placeholder, value);
     }
 
+    public void addPlaceholders(Map<String, String> placeholders) {
+
+        if(placeholders == null)
+            throw new IllegalArgumentException("Map cannot be null.");
+
+        this.placeholders.putAll(placeholders);
+    }
+
     public void removePlaceholder(String placeholder) {
 
         if(placeholder == null)
