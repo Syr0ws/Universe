@@ -1,0 +1,14 @@
+package com.github.syr0ws.universe.commons.modules.chat;
+
+import java.util.Collection;
+
+public interface ChatModel {
+
+    void registerChat(Chat chat);
+
+    void unregisterChat(Chat chat);
+
+    boolean isRegistered(Chat chat);
+
+    Collection<Chat> getChats();
+}

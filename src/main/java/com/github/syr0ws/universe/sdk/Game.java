@@ -1,0 +1,31 @@
+package com.github.syr0ws.universe.sdk;
+
+import com.github.syr0ws.universe.sdk.game.controller.GameController;
+import com.github.syr0ws.universe.sdk.game.model.GameModel;
+import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
+import com.github.syr0ws.universe.commons.modules.GameModuleService;
+import com.github.syr0ws.universe.commons.modules.ModuleService;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public abstract class Game extends JavaPlugin {
+
+    private final ModuleService service;
+    private final ListenerManager listenerManager;
+
+    public Game() {
+        this.service = new GameModuleService();
+        this.listenerManager = new ListenerManager(this);
+    }
+
+    public abstract GameModel getGameModel();
+
+    public abstract GameController getGameController();
+
+    public ListenerManager getListenerManager() {
+        return this.listenerManager;
+    }
+
+    public ModuleService getModuleService() {
+        return this.service;
+    }
+}
