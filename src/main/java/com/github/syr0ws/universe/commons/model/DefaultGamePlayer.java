@@ -1,6 +1,7 @@
 package com.github.syr0ws.universe.commons.model;
 
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
+import com.github.syr0ws.universe.sdk.game.model.mode.ModeType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -11,15 +12,26 @@ public class DefaultGamePlayer implements GamePlayer {
     private final UUID uuid;
     private final String name;
 
+    private ModeType modeType;
     private boolean playing;
 
-    public DefaultGamePlayer(Player player) {
+    public DefaultGamePlayer(Player player, ModeType type) {
 
         if(player == null)
             throw new IllegalArgumentException("Player cannot be null.");
 
+        this.setModeType(type);
+
         this.uuid = player.getUniqueId();
         this.name = player.getName();
+    }
+
+    public void setModeType(ModeType type) {
+
+        if(type == null)
+            throw new IllegalArgumentException("ModeType cannot be null.");
+
+        this.modeType = type;
     }
 
     public void setPlaying() {
@@ -49,5 +61,10 @@ public class DefaultGamePlayer implements GamePlayer {
     @Override
     public Player getPlayer() {
         return Bukkit.getPlayer(this.uuid);
+    }
+
+    @Override
+    public ModeType getModeType() {
+        return this.modeType;
     }
 }

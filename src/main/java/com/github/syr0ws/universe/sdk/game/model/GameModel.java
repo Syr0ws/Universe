@@ -22,6 +22,8 @@ public interface GameModel extends AttributeObservable {
 
     boolean isValid(GamePlayer player);
 
+    boolean exists(UUID uuid);
+
     boolean exists(GamePlayer player);
 
     int getTime();

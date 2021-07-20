@@ -1,11 +1,11 @@
 package com.github.syr0ws.universe.commons.model;
 
+import com.github.syr0ws.universe.commons.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.commons.settings.GameSettings;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
-import com.github.syr0ws.universe.sdk.game.model.GameState;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycle;
+import com.github.syr0ws.universe.sdk.game.model.GameState;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public abstract class DefaultGameModel extends AbstractAttributeObservable implements GameModel {
 
     private final GameSettings settings;
-    private final Map<UUID, GamePlayer> players = new HashMap<>();
+    private final Map<UUID, DefaultGamePlayer> players = new HashMap<>();
 
-    private GameCycle cycle;
+    private DefaultGameCycle cycle;
     private int time;
 
     public DefaultGameModel(GameSettings settings) {
@@ -34,7 +34,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
         if(!this.isValid(player))
             throw new IllegalArgumentException("Invalid GamePlayer.");
 
-        this.players.put(player.getUUID(), player);
+        this.players.put(player.getUUID(), (DefaultGamePlayer) player);
         this.notifyChange(GameAttribute.GAME_PLAYER_CHANGE);
     }
 
@@ -53,7 +53,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
         this.notifyChange(GameAttribute.GAME_PLAYER_CHANGE);
     }
 
-    public void setCycle(GameCycle cycle) {
+    public void setCycle(DefaultGameCycle cycle) {
 
         if(cycle == null)
             throw new IllegalArgumentException("GameCycle cannot be null.");
@@ -90,6 +90,11 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     }
 
     @Override
+    public boolean exists(UUID uuid) {
+        return this.players.containsKey(uuid);
+    }
+
+    @Override
     public boolean exists(GamePlayer player) {
         return this.players.containsKey(player.getUUID());
     }
@@ -110,29 +115,29 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     }
 
     @Override
-    public GameCycle getCycle() {
+    public DefaultGameCycle getCycle() {
         return this.cycle;
     }
 
     @Override
-    public GamePlayer getPlayer(UUID uuid) {
+    public DefaultGamePlayer getPlayer(UUID uuid) {
         return this.players.get(uuid);
     }
 
     @Override
-    public Optional<? extends GamePlayer> getPlayer(String name) {
+    public Optional<DefaultGamePlayer> getPlayer(String name) {
         return this.players.values().stream()
                 .filter(player -> player.getName().equals(name))
                 .findFirst();
     }
 
     @Override
-    public Collection<? extends GamePlayer> getPlayers() {
+    public Collection<DefaultGamePlayer> getPlayers() {
         return this.players.values();
     }
 
     @Override
-    public Collection<? extends GamePlayer> getOnlinePlayers() {
+    public Collection<DefaultGamePlayer> getOnlinePlayers() {
         return this.players.values().stream()
                 .filter(GamePlayer::isOnline)
                 .collect(Collectors.toList());

@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.commons.model;
+package com.github.syr0ws.universe.commons.cycle;
 
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
