@@ -5,11 +5,11 @@ import com.github.syr0ws.universe.sdk.settings.types.LocationSetting;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
 import org.bukkit.Location;
 
-public class CraftGameSettings implements GameSettings {
+public class DefaultGameSettings implements GameSettings {
 
     private final SettingManager manager;
 
-    public CraftGameSettings(SettingManager manager) {
+    public DefaultGameSettings(SettingManager manager) {
 
         if(manager == null)
             throw new IllegalArgumentException("SettingsManager cannot be null.");
