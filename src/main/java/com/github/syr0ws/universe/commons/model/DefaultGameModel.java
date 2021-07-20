@@ -59,6 +59,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
             throw new IllegalArgumentException("GameCycle cannot be null.");
 
         this.cycle = cycle;
+        this.notifyChange(GameAttribute.STATE_CHANGE);
         this.notifyChange(GameAttribute.CYCLE_CHANGE);
     }
 
