@@ -31,12 +31,17 @@ public class WaitingListener implements Listener {
     public void onGamePlayerJoin(GamePlayerJoinEvent event) {
 
         GameSettings settings = this.model.getSettings();
-        MutableSetting<Integer> setting = settings.getMinPlayerSetting();
+
+        MutableSetting<Boolean> autoStartSetting = settings.getAllowAutoStartSetting();
+        MutableSetting<Integer> minPlayerSetting = settings.getMinPlayerSetting();
+
+        // Checking if the game can be started automatically.
+        if(!autoStartSetting.getValue()) return;
 
         int players = this.model.getOnlinePlayers().size();
 
         // Min number of online players not reached.
-        if(players < setting.getValue()) return;
+        if(players < minPlayerSetting.getValue()) return;
 
         // Starting the game.
         try { this.controller.startGame();
