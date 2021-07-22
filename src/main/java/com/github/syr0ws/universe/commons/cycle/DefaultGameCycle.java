@@ -2,8 +2,8 @@ package com.github.syr0ws.universe.commons.cycle;
 
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
-import com.github.syr0ws.universe.sdk.attributes.Attribute;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleAttribute;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleException;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleState;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
@@ -32,6 +32,10 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
 
     @Override
     public void unload() {
+
+        // Automatically remove listeners.
+        this.listenerManager.removeListeners();
+
         this.setState(GameCycleState.UNLOADED);
     }
 
@@ -68,11 +72,6 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
             throw new GameCycleException(String.format("State '%s' is not the next state of '%s'.", state.name(), this.state.name()));
 
         this.state = state;
-        this.notifyChange(GameCycleAttribute.CYCLE_STATE_CHANGE);
-    }
-
-    public enum GameCycleAttribute implements Attribute {
-
-        CYCLE_STATE_CHANGE, DONE;
+        this.notifyChange(GameCycleAttribute.STATE_CHANGE);
     }
 }

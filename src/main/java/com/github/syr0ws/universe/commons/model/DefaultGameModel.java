@@ -3,6 +3,7 @@ package com.github.syr0ws.universe.commons.model;
 import com.github.syr0ws.universe.commons.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.commons.settings.GameSettings;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.game.model.GameState;
@@ -15,7 +16,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     private final GameSettings settings;
     private final Map<UUID, DefaultGamePlayer> players = new HashMap<>();
 
-    private DefaultGameCycle cycle;
+    private GameCycle cycle;
     private int time;
 
     public DefaultGameModel(GameSettings settings) {
@@ -53,7 +54,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
         this.notifyChange(GameAttribute.GAME_PLAYER_CHANGE);
     }
 
-    public void setCycle(DefaultGameCycle cycle) {
+    public void setCycle(GameCycle cycle) {
 
         if(cycle == null)
             throw new IllegalArgumentException("GameCycle cannot be null.");
@@ -115,7 +116,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     }
 
     @Override
-    public DefaultGameCycle getCycle() {
+    public GameCycle getCycle() {
         return this.cycle;
     }
 

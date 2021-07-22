@@ -12,6 +12,9 @@ import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerModeChangeEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
 import com.github.syr0ws.universe.sdk.game.controller.GameController;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleAttribute;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleFactory;
 import com.github.syr0ws.universe.sdk.game.model.GameException;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.game.model.GameState;
@@ -34,16 +37,19 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     private final DefaultGameModel model;
     private final DefaultModeManager modeManager;
-    private final DefaultGameCycleFactory cycleFactory;
+    private final GameCycleFactory cycleFactory;
 
-    public DefaultGameController(DefaultGameModel model) {
+    public DefaultGameController(DefaultGameModel model, GameCycleFactory cycleFactory) {
 
         if(model == null)
             throw new IllegalArgumentException("DefaultGameModel cannot be null.");
 
+        if(cycleFactory == null)
+            throw new IllegalArgumentException("GameCycleFactory cannot be null.");
+
         this.model = model;
         this.modeManager = new DefaultModeManager();
-        this.cycleFactory = new DefaultGameCycleFactory();
+        this.cycleFactory = cycleFactory;
     }
 
     @Override
@@ -110,7 +116,7 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     @Override
     public Collection<Attribute> observed() {
-        return Collections.singleton(DefaultGameCycle.GameCycleAttribute.DONE);
+        return Collections.singleton(GameCycleAttribute.DONE);
     }
 
     private void onPlayerJoin(Player player) {
@@ -165,17 +171,17 @@ public abstract class DefaultGameController implements GameController, Attribute
     private void setGameState(GameState state) {
 
         // Actions on the old GameCycle.
-        DefaultGameCycle current = this.model.getCycle();
+        GameCycle current = this.model.getCycle();
 
         // Disabling cycle only if it exists.
         if(current != null) this.disableCycle(current);
 
         // Actions on the new GameCycle.
-        DefaultGameCycle cycle = this.cycleFactory.getGameCycle(state);
+        GameCycle cycle = this.cycleFactory.getGameCycle(state);
         this.enableCycle(cycle);
     }
 
-    private void enableCycle(DefaultGameCycle cycle) {
+    private void enableCycle(GameCycle cycle) {
 
         this.model.setCycle(cycle);
 
@@ -184,7 +190,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         cycle.addObserver(this); // Adding observer.
     }
 
-    private void disableCycle(DefaultGameCycle cycle) {
+    private void disableCycle(GameCycle cycle) {
 
         cycle.stop();
         cycle.unload(); // Unloading cycle.
