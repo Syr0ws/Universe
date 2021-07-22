@@ -166,7 +166,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         mode.disable(player);
     }
 
-    private void setGameState(GameState state) {
+    protected void setGameState(GameState state) {
 
         // Actions on the old GameCycle.
         GameCycle current = this.model.getCycle();
