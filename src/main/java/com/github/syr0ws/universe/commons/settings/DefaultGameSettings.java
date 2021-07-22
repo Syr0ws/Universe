@@ -17,6 +17,8 @@ public class DefaultGameSettings implements GameSettings {
         this.manager = manager;
     }
 
+    // TODO Gérer le chargement des settings.
+
     public SettingManager getManager() {
         return this.manager;
     }
