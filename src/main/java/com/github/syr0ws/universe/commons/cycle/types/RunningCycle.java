@@ -28,6 +28,6 @@ public class RunningCycle extends DefaultGameCycle {
     private void registerListeners() {
 
         ListenerManager manager = super.getListenerManager();
-        manager.addListener(new RunningListener(super.getModel()));
+        manager.addListener(new RunningListener(super.getModel(), super.getController()));
     }
 }

@@ -2,6 +2,8 @@ package com.github.syr0ws.universe.commons.listeners;
 
 import com.github.syr0ws.universe.commons.mode.DefaultModeType;
 import com.github.syr0ws.universe.commons.settings.GameSettings;
+import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
+import com.github.syr0ws.universe.sdk.game.controller.GameController;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
@@ -13,13 +15,18 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 public class RunningListener implements Listener {
 
     private final GameModel model;
+    private final GameController controller;
 
-    public RunningListener(GameModel model) {
+    public RunningListener(GameModel model, GameController controller) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");
 
+        if(controller == null)
+            throw new IllegalArgumentException("GameController cannot be null.");
+
         this.model = model;
+        this.controller = controller;
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -42,5 +49,13 @@ public class RunningListener implements Listener {
 
         // Kicking the player.
         event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_FULL);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onGamePlayerJoin(GamePlayerJoinEvent event) {
+
+        GamePlayer gamePlayer = event.getGamePlayer();
+
+        if(!gamePlayer.isPlaying()) this.controller.setMode(gamePlayer, DefaultModeType.SPECTATOR);
     }
 }
