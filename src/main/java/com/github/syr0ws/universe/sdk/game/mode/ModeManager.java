@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.sdk.game.model.mode;
+package com.github.syr0ws.universe.sdk.game.mode;
 
 public interface ModeManager {
 

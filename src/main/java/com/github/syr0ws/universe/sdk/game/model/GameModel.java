@@ -2,7 +2,7 @@ package com.github.syr0ws.universe.sdk.game.model;
 
 import com.github.syr0ws.universe.commons.settings.GameSettings;
 import com.github.syr0ws.universe.sdk.attributes.AttributeObservable;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycle;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -3,9 +3,9 @@ package com.github.syr0ws.universe.commons.cycle;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
 import com.github.syr0ws.universe.sdk.attributes.Attribute;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycle;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycleException;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycleState;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleException;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleState;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
 public abstract class DefaultGameCycle extends AbstractAttributeObservable implements GameCycle {

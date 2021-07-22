@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.game.model;
 
-import com.github.syr0ws.universe.sdk.game.model.mode.ModeType;
+import com.github.syr0ws.universe.sdk.game.mode.ModeType;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;

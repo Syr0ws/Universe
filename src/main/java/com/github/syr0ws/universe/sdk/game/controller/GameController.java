@@ -2,7 +2,7 @@ package com.github.syr0ws.universe.sdk.game.controller;
 
 import com.github.syr0ws.universe.sdk.game.model.GameException;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
-import com.github.syr0ws.universe.sdk.game.model.mode.ModeType;
+import com.github.syr0ws.universe.sdk.game.mode.ModeType;
 
 public interface GameController {
 

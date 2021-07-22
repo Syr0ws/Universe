@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.sdk.events;
 
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
-import com.github.syr0ws.universe.sdk.game.model.mode.Mode;
+import com.github.syr0ws.universe.sdk.game.mode.Mode;
 import org.bukkit.event.HandlerList;
 
 public class GamePlayerModeChangeEvent extends GamePlayerEvent {

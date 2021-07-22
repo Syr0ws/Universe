@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.commons.cycle;
 
 import com.github.syr0ws.universe.sdk.game.model.GameState;
-import com.github.syr0ws.universe.sdk.game.model.cycle.GameCycleFactory;
+import com.github.syr0ws.universe.sdk.game.cycle.GameCycleFactory;
 
 public class DefaultGameCycleFactory implements GameCycleFactory {
 

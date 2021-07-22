@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.sdk.game.model.cycle;
+package com.github.syr0ws.universe.sdk.game.cycle;
 
 import com.github.syr0ws.universe.sdk.game.model.GameState;
 

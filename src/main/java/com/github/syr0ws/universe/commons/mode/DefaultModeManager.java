@@ -1,8 +1,8 @@
 package com.github.syr0ws.universe.commons.mode;
 
-import com.github.syr0ws.universe.sdk.game.model.mode.Mode;
-import com.github.syr0ws.universe.sdk.game.model.mode.ModeManager;
-import com.github.syr0ws.universe.sdk.game.model.mode.ModeType;
+import com.github.syr0ws.universe.sdk.game.mode.Mode;
+import com.github.syr0ws.universe.sdk.game.mode.ModeManager;
+import com.github.syr0ws.universe.sdk.game.mode.ModeType;
 
 import java.util.HashMap;
 import java.util.Map;
