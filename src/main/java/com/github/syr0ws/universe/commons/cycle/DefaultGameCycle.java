@@ -2,25 +2,38 @@ package com.github.syr0ws.universe.commons.cycle;
 
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
+import com.github.syr0ws.universe.sdk.game.controller.GameController;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleAttribute;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleException;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleState;
+import com.github.syr0ws.universe.sdk.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
 public abstract class DefaultGameCycle extends AbstractAttributeObservable implements GameCycle {
 
     private final Game game;
-    private final ListenerManager listenerManager;
+    private final GameModel model;
+    private final GameController controller;
 
+    private final ListenerManager listenerManager;
     private GameCycleState state;
 
-    public DefaultGameCycle(Game game) {
+    public DefaultGameCycle(Game game, GameModel model, GameController controller) {
 
         if(game == null)
             throw new IllegalArgumentException("Game cannot be null.");
 
+        if(model == null)
+            throw new IllegalArgumentException("GameModel cannot be null.");
+
+        if(controller == null)
+            throw new IllegalArgumentException("GameController cannot be null.");
+
         this.game = game;
+        this.model = model;
+        this.controller = controller;
+
         this.listenerManager = new ListenerManager(game);
         this.state = GameCycleState.WAITING;
     }
@@ -60,6 +73,14 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
 
     public Game getGame() {
         return this.game;
+    }
+
+    public GameModel getModel() {
+        return this.model;
+    }
+
+    public GameController getController() {
+        return this.controller;
     }
 
     public ListenerManager getListenerManager() {
