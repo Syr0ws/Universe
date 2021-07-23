@@ -1,7 +1,6 @@
 package com.github.syr0ws.universe.commons.controller;
 
 import com.github.syr0ws.universe.commons.mode.DefaultModeManager;
-import com.github.syr0ws.universe.commons.mode.DefaultModeType;
 import com.github.syr0ws.universe.commons.model.DefaultGameModel;
 import com.github.syr0ws.universe.commons.model.DefaultGamePlayer;
 import com.github.syr0ws.universe.sdk.Game;
@@ -15,7 +14,6 @@ import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleAttribute;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycleFactory;
 import com.github.syr0ws.universe.sdk.game.mode.Mode;
-import com.github.syr0ws.universe.sdk.game.mode.ModeFactory;
 import com.github.syr0ws.universe.sdk.game.mode.ModeManager;
 import com.github.syr0ws.universe.sdk.game.mode.ModeType;
 import com.github.syr0ws.universe.sdk.game.model.GameException;
@@ -64,7 +62,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         if(type == null)
             throw new IllegalArgumentException("Mode cannot be null.");
 
-        Mode mode = ModeFactory.getMode(type);
+        Mode mode = this.modeManager.getMode(type);
 
         DefaultGamePlayer gamePlayer = (DefaultGamePlayer) player;
 
@@ -78,7 +76,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         // Removing old mode if it exists and is not the same as the new one.
         // Also checking that the player is online.
         if(old != null && player.isOnline())
-            ModeFactory.getMode(old).disable(player.getPlayer());
+            this.modeManager.getMode(old).disable(player.getPlayer());
 
         gamePlayer.setModeType(mode.getType());
 
@@ -140,7 +138,7 @@ public abstract class DefaultGameController implements GameController, Attribute
             gamePlayer = this.model.getPlayer(player.getUniqueId());
 
             // Handling mode.
-            Mode mode = ModeFactory.getMode(gamePlayer.getModeType());
+            Mode mode = this.modeManager.getMode(gamePlayer.getModeType());
             mode.enable(player);
         }
 
@@ -165,7 +163,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         Bukkit.getPluginManager().callEvent(event);
 
         // Disabling mode.
-        Mode mode = ModeFactory.getMode(gamePlayer.getModeType());
+        Mode mode = this.modeManager.getMode(gamePlayer.getModeType());
         mode.disable(player);
     }
 
