@@ -9,6 +9,7 @@ import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.game.model.GameState;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +29,8 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
 
         this.settings = settings;
     }
+
+    public abstract DefaultGamePlayer createPlayer(Player player);
 
     public void addPlayer(GamePlayer player) {
 

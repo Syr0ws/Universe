@@ -4,6 +4,7 @@ import com.github.syr0ws.universe.commons.mode.DefaultModeManager;
 import com.github.syr0ws.universe.commons.mode.DefaultModeType;
 import com.github.syr0ws.universe.commons.model.DefaultGameModel;
 import com.github.syr0ws.universe.commons.model.DefaultGamePlayer;
+import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.Attribute;
 import com.github.syr0ws.universe.sdk.attributes.AttributeObserver;
 import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
@@ -26,6 +27,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.PluginManager;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,20 +37,23 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     private final DefaultGameModel model;
     private final DefaultModeManager modeManager;
-    private final GameCycleFactory cycleFactory;
 
-    public DefaultGameController(DefaultGameModel model, GameCycleFactory cycleFactory) {
+    public DefaultGameController(Game game, DefaultGameModel model) {
+
+        if(game == null)
+            throw new IllegalArgumentException("Game cannot be null.");
 
         if(model == null)
             throw new IllegalArgumentException("DefaultGameModel cannot be null.");
 
-        if(cycleFactory == null)
-            throw new IllegalArgumentException("GameCycleFactory cannot be null.");
-
         this.model = model;
         this.modeManager = new DefaultModeManager();
-        this.cycleFactory = cycleFactory;
+
+        PluginManager manager = Bukkit.getPluginManager();
+        manager.registerEvents(new GameListener(), game);
     }
+
+    public abstract GameCycleFactory getCycleFactory();
 
     @Override
     public void setMode(GamePlayer player, ModeType type) {
@@ -123,14 +128,12 @@ public abstract class DefaultGameController implements GameController, Attribute
 
         if(!this.model.exists(player.getUniqueId())) {
 
-            ModeType type = this.model.isStarted() ? DefaultModeType.SPECTATOR : DefaultModeType.WAITING;
-
             // Creating the GamePlayer.
-            gamePlayer = new DefaultGamePlayer(player, type);
+            gamePlayer = this.model.createPlayer(player);
             this.model.addPlayer(gamePlayer); // Storing player.
 
             // Setting mode.
-            this.setMode(gamePlayer, type);
+            this.setMode(gamePlayer, gamePlayer.getModeType());
 
         } else {
 
@@ -175,7 +178,7 @@ public abstract class DefaultGameController implements GameController, Attribute
         if(current != null) this.disableCycle(current);
 
         // Actions on the new GameCycle.
-        GameCycle cycle = this.cycleFactory.getGameCycle(state);
+        GameCycle cycle = this.getCycleFactory().getGameCycle(state);
         this.enableCycle(cycle);
     }
 
