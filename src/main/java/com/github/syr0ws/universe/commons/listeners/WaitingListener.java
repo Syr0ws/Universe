@@ -1,12 +1,10 @@
 package com.github.syr0ws.universe.commons.listeners;
 
-import com.github.syr0ws.universe.commons.mode.DefaultModeType;
 import com.github.syr0ws.universe.commons.settings.GameSettings;
 import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
 import com.github.syr0ws.universe.sdk.game.controller.GameController;
 import com.github.syr0ws.universe.sdk.game.model.GameException;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
-import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,14 +29,6 @@ public class WaitingListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onGamePlayerJoin(GamePlayerJoinEvent event) {
-
-        GamePlayer gamePlayer = event.getGamePlayer();
-
-        // Setting player is waiting mode.
-        this.controller.setMode(gamePlayer, DefaultModeType.WAITING);
-
-        // Teleporting him to the spawn.
-        gamePlayer.getPlayer().teleport(this.model.getSpawn());
 
         GameSettings settings = this.model.getSettings();
 

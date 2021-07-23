@@ -58,8 +58,12 @@ public class PreRunningListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onGamePlayerJoin(GamePlayerJoinEvent event) {
+
         GamePlayer player = event.getGamePlayer();
+
         this.controller.setMode(player, DefaultModeType.WAITING);
+
+        player.getPlayer().teleport(this.model.getSpawn());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
