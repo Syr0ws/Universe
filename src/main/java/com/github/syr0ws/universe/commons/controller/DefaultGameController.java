@@ -96,8 +96,8 @@ public abstract class DefaultGameController implements GameController, Attribute
     @Override
     public void stopGame() throws GameException {
 
-        if(!this.model.isStarted())
-            throw new GameException("No game is currently started.");
+        if(!this.model.isStarting() && !this.model.isStarted())
+            throw new GameException("No game is currently started or starting.");
 
         if(this.model.isFinished())
             throw new GameException("Game already finished.");
