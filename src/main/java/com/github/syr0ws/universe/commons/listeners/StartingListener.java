@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.commons.listeners;
 
 import com.github.syr0ws.universe.commons.settings.GameSettings;
-import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
+import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
 import com.github.syr0ws.universe.sdk.game.controller.GameController;
 import com.github.syr0ws.universe.sdk.game.model.GameException;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
@@ -28,7 +28,7 @@ public class StartingListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onGamePlayerJoin(GamePlayerJoinEvent event) {
+    public void onGamePlayerJoin(GamePlayerQuitEvent event) {
 
         GameSettings settings = this.model.getSettings();
         MutableSetting<Integer> minPlayerSetting = settings.getMinPlayerSetting();
