@@ -81,6 +81,11 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     }
 
     @Override
+    public boolean isStarting() {
+        return this.getState() == GameState.STARTING;
+    }
+
+    @Override
     public boolean isRunning() {
         return this.getState() == GameState.RUNNING;
     }
