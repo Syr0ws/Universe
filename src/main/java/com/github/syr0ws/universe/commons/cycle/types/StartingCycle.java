@@ -2,6 +2,7 @@ package com.github.syr0ws.universe.commons.cycle.types;
 
 import com.github.syr0ws.universe.commons.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.commons.listeners.PreRunningListener;
+import com.github.syr0ws.universe.commons.listeners.StartingListener;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.game.controller.GameController;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
@@ -29,5 +30,6 @@ public class StartingCycle extends DefaultGameCycle {
 
         ListenerManager manager = super.getListenerManager();
         manager.addListener(new PreRunningListener(super.getModel(), super.getController()));
+        manager.addListener(new StartingListener(super.getModel(), super.getController()));
     }
 }
