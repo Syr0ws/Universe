@@ -1,9 +1,12 @@
 package com.github.syr0ws.universe.commons.settings;
 
+import com.github.syr0ws.universe.sdk.settings.dao.ConfigSettingLoader;
+import com.github.syr0ws.universe.sdk.settings.dao.SettingLoader;
 import com.github.syr0ws.universe.sdk.settings.manager.SettingManager;
 import com.github.syr0ws.universe.sdk.settings.types.LocationSetting;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public class DefaultGameSettings implements GameSettings {
 
@@ -17,7 +20,15 @@ public class DefaultGameSettings implements GameSettings {
         this.manager = manager;
     }
 
-    // TODO Gérer le chargement des settings.
+    public void init(FileConfiguration config) {
+
+        for (GameSettingEnum value : GameSettingEnum.values()) {
+            this.manager.addSetting(value, value.getSetting());
+        }
+
+        SettingLoader loader = new ConfigSettingLoader(config);
+        loader.load(this.manager.getSettings());
+    }
 
     public SettingManager getManager() {
         return this.manager;
