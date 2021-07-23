@@ -15,6 +15,12 @@ public class StartingCycle extends DefaultGameCycle {
     }
 
     @Override
+    public void load() {
+        super.load();
+        this.registerListeners();
+    }
+
+    @Override
     public GameState getGameState() {
         return GameState.STARTING;
     }
