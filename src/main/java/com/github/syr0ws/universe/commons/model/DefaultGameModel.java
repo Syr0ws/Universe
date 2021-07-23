@@ -7,6 +7,8 @@ import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
 import com.github.syr0ws.universe.sdk.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.game.model.GameState;
+import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
+import org.bukkit.Location;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,6 +105,12 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     @Override
     public int getTime() {
         return this.time;
+    }
+
+    @Override
+    public Location getSpawn() {
+        MutableSetting<Location> setting = this.settings.getGameSpawnSetting();
+        return setting.getValue();
     }
 
     @Override

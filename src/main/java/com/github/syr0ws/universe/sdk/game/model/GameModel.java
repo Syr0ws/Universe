@@ -3,6 +3,7 @@ package com.github.syr0ws.universe.sdk.game.model;
 import com.github.syr0ws.universe.commons.settings.GameSettings;
 import com.github.syr0ws.universe.sdk.attributes.AttributeObservable;
 import com.github.syr0ws.universe.sdk.game.cycle.GameCycle;
+import org.bukkit.Location;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -27,6 +28,8 @@ public interface GameModel extends AttributeObservable {
     boolean exists(GamePlayer player);
 
     int getTime();
+
+    Location getSpawn();
 
     GameSettings getSettings();
 
