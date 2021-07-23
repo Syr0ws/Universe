@@ -56,6 +56,12 @@ public class RunningListener implements Listener {
 
         GamePlayer gamePlayer = event.getGamePlayer();
 
-        if(!gamePlayer.isPlaying()) this.controller.setMode(gamePlayer, DefaultModeType.SPECTATOR);
+        if(gamePlayer.isPlaying()) return;
+
+        // Setting the player in spectator mode.
+        this.controller.setMode(gamePlayer, DefaultModeType.SPECTATOR);
+
+        // Teleporting him to the spawn.
+        gamePlayer.getPlayer().teleport(this.model.getSpawn());
     }
 }
