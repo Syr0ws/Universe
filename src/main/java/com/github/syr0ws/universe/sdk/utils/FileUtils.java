@@ -16,6 +16,7 @@ public class FileUtils {
         if(stream == null)
             throw new IOException(String.format("Resource '%s' not found.", resource));
 
+        Files.createDirectories(target);
         Files.copy(stream, target);
     }
 }
