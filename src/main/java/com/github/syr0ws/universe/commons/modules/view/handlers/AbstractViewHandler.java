@@ -79,6 +79,8 @@ public abstract class AbstractViewHandler<T extends View> implements ViewHandler
         // If the view is currently active, removing it.
         if(this.isPriorityView(player, view)) view.remove();
 
+        views.remove(view);
+
         // If there is no more views, removing player data.
         if(views.size() == 0) this.views.remove(player);
     }
