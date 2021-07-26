@@ -130,9 +130,6 @@ public abstract class DefaultGameController implements GameController, Attribute
             gamePlayer = this.model.createPlayer(player);
             this.model.addPlayer(gamePlayer); // Storing player.
 
-            // Setting mode.
-            this.setMode(gamePlayer, gamePlayer.getModeType());
-
         } else {
 
             gamePlayer = this.model.getPlayer(player.getUniqueId());

@@ -15,12 +15,10 @@ public class DefaultGamePlayer implements GamePlayer {
     private ModeType modeType;
     private boolean playing;
 
-    public DefaultGamePlayer(Player player, ModeType type) {
+    public DefaultGamePlayer(Player player) {
 
         if(player == null)
             throw new IllegalArgumentException("Player cannot be null.");
-
-        this.setModeType(type);
 
         this.uuid = player.getUniqueId();
         this.name = player.getName();
