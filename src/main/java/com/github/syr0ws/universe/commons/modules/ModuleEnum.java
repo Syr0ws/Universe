@@ -1,5 +1,6 @@
 package com.github.syr0ws.universe.commons.modules;
 
+import com.github.syr0ws.universe.commons.modules.view.impl.CraftViewModule;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.commons.modules.border.impl.CraftBorderModule;
 import com.github.syr0ws.universe.commons.modules.chat.impl.CraftChatModule;
@@ -38,6 +39,14 @@ public enum ModuleEnum {
         @Override
         public Module newInstance(Game game) {
             return new CraftScoreboardModule(game);
+        }
+    },
+
+    VIEW_MODULE("ViewModule") {
+
+        @Override
+        public Module newInstance(Game game) {
+            return new CraftViewModule(game);
         }
     },
 
