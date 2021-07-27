@@ -16,7 +16,13 @@ public class FileUtils {
         if(stream == null)
             throw new IOException(String.format("Resource '%s' not found.", resource));
 
-        Files.createDirectories(target);
+        if(target.getParent() != null) {
+
+            // Creating all the parent directories that do not exist.
+            // This method doesn't throw any exception if one of the parent already exists.
+            Files.createDirectories(target.getParent());
+        }
+
         Files.copy(stream, target);
     }
 }
