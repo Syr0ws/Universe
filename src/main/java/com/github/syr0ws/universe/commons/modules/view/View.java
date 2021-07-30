@@ -13,4 +13,6 @@ public interface View {
     String getId();
 
     int getPriority();
+
+    boolean isUpdatable();
 }
