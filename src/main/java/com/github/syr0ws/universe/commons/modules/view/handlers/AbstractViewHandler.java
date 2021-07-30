@@ -137,6 +137,7 @@ public abstract class AbstractViewHandler<T extends View> implements ViewHandler
         public void run() {
             AbstractViewHandler.this.views.keySet().stream()
                     .map(AbstractViewHandler.this::getPriorityView)
+                    .filter(View::isUpdatable)
                     .forEach(View::update);
         }
     }
