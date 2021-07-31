@@ -18,8 +18,7 @@ public class DirectionUtils {
 
         // Angle = playerYaw - targetYaw
         // Using modulo to set the angle between 0 and 360.
-        // Multiplying the angle by -1 to get a positive number.
-        double angle = ((yaw - targetLocation.getYaw()) % 360) * (-1);
+        double angle = ((yaw - targetLocation.getYaw()) % 360);
 
         return DirectionUtils.getDirection(angle);
     }
@@ -33,24 +32,36 @@ public class DirectionUtils {
 
     private static Direction getDirection(double angle) {
 
-        // Note : In this method, all the angle are inverted because we need the direction to go to.
+        // If the angle is negative, multiplying it by -1 to get a positive number.
+        // This doesn't change the angle.
+        if(angle < 0) angle += 360;
+
+        // Here is the range of the angle of each direction:
+        // South (-22.5 <= 0 < 22.5)
+        // South east (22.5 <= 45 < 67.5)
+        // East (67.5 <= 90 < 112.5)
+        // North east (112.5 <= 145 < 157.5)
+        // North (157.5 <= 180 < 202.5)
+        // North west (202.5 <= 225 < 247.5)
+        // West (247.5 <= 270 < 292.5)
+        // South west (292.5 <= 315 < 337.5)
 
         if (0 <= angle && angle < 22.5) {
             return Direction.SOUTH;
         } else if (angle < 67.5) {
-            return Direction.SOUTH_WEST;
+            return Direction.SOUTH_EAST;
         } else if (angle < 112.5) {
-            return Direction.WEST;
+            return Direction.EAST;
         } else if (angle < 157.5) {
-            return Direction.NORTH_WEST;
+            return Direction.NORTH_EAST;
         } else if (angle < 202.5) {
             return Direction.NORTH;
         } else if (angle < 247.5) {
-            return Direction.NORTH_EAST;
+            return Direction.NORTH_WEST;
         } else if (angle < 292.5) {
-            return Direction.EAST;
+            return Direction.WEST;
         } else if (angle < 337.5) {
-            return Direction.SOUTH_EAST;
+            return Direction.SOUTH_WEST;
         } else if (angle < 360.0) {
             return Direction.SOUTH;
         } else {
