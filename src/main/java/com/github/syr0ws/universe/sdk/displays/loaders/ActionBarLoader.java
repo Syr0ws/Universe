@@ -1,10 +1,10 @@
 package com.github.syr0ws.universe.sdk.displays.loaders;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
+import com.github.syr0ws.universe.commons.modules.lang.LangService;
 import com.github.syr0ws.universe.sdk.displays.DisplayLoader;
+import com.github.syr0ws.universe.sdk.displays.types.ActionBar;
 import com.github.syr0ws.universe.sdk.displays.types.LegacyActionBar;
 import com.github.syr0ws.universe.sdk.displays.types.NewActionBar;
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
 import com.github.syr0ws.universe.sdk.tools.Version;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -23,10 +23,12 @@ public class ActionBarLoader implements DisplayLoader {
     }
 
     @Override
-    public Display load(ConfigurationSection section) {
+    public ActionBar load(ConfigurationSection section) {
+        String text = section.getString("text", "");
+        return this.getActionBar(text);
+    }
 
-        String text = section.getString("text");
-
+    public ActionBar getActionBar(String text) {
         return VERSION.isLegacy() ? new LegacyActionBar(this.service, text) : new NewActionBar(this.service, text);
     }
 }

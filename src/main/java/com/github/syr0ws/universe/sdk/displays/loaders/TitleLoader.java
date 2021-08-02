@@ -33,6 +33,10 @@ public class TitleLoader implements DisplayLoader {
         int stay = section.getInt("stay", Title.DEFAULT_STAY);
         int fadeOut = section.getInt("fade-out", Title.DEFAULT_FADE_OUT);
 
+        return this.getTitle(title, subtitle, fadeIn, stay, fadeOut);
+    }
+
+    public Title getTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut) {
         return VERSION.isLegacy() ?
                 new LegacyTitle(this.service, title, subtitle, fadeIn, stay, fadeOut) :
                 new NewTitle(this.service, title, subtitle, fadeIn, stay, fadeOut);
