@@ -1,12 +1,11 @@
 package com.github.syr0ws.universe.commons.modules;
 
-import com.github.syr0ws.universe.commons.modules.view.impl.CraftViewModule;
-import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.commons.modules.border.impl.CraftBorderModule;
 import com.github.syr0ws.universe.commons.modules.chat.impl.CraftChatModule;
 import com.github.syr0ws.universe.commons.modules.combat.impl.CraftCombatModule;
 import com.github.syr0ws.universe.commons.modules.lang.impl.CraftLangModule;
-import com.github.syr0ws.universe.commons.modules.scoreboard.impl.CraftScoreboardModule;
+import com.github.syr0ws.universe.commons.modules.view.impl.CraftViewModule;
+import com.github.syr0ws.universe.sdk.Game;
 
 public enum ModuleEnum {
 
@@ -31,14 +30,6 @@ public enum ModuleEnum {
         @Override
         public Module newInstance(Game game) {
             return new CraftBorderModule(game);
-        }
-    },
-
-    SCOREBOARD_MODULE("ScoreboardModule") {
-
-        @Override
-        public Module newInstance(Game game) {
-            return new CraftScoreboardModule(game);
         }
     },
 
