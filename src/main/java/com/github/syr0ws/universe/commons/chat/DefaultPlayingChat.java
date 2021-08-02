@@ -14,11 +14,11 @@ import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
 import com.github.syr0ws.universe.sdk.settings.types.MutableSetting;
 import org.bukkit.entity.Player;
 
-public class DefaultGameChat implements Chat {
+public class DefaultPlayingChat implements Chat {
 
     private final GameModel model;
 
-    public DefaultGameChat(GameModel model) {
+    public DefaultPlayingChat(GameModel model) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");
