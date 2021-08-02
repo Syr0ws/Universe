@@ -1,5 +1,6 @@
 package com.github.syr0ws.universe.commons.modules.chat;
 
+import com.github.syr0ws.universe.commons.modules.chat.impl.CraftChatMessage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -29,14 +30,20 @@ public class ChatListener implements Listener {
         // Always cancelling the event.
         event.setCancelled(true);
 
-        ChatMessage message = new ChatMessage(event.getPlayer(), event.getMessage());
+        CraftChatMessage message = new CraftChatMessage(event.getPlayer(), event.getMessage());
 
         // Finding a chat.
         Optional<Chat> optional = this.service.getChats().stream()
                 .filter(chat -> chat.canSend(message))
                 .max(Comparator.comparingInt(chat -> chat.getPriority().ordinal()));
 
-        // If a chat has been found, handling message.
-        optional.ifPresent(chat -> chat.onChat(message));
+        // Checking if a chat has been found.
+        if(!optional.isPresent()) return;
+
+        Chat chat = optional.get();
+        chat.onChat(message);
+
+        // Sending the message.
+        message.getReceivers().forEach(player -> player.sendMessage(message.getFormat()));
     }
 }

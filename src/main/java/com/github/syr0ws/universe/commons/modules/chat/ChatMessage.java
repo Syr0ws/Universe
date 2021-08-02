@@ -2,28 +2,19 @@ package com.github.syr0ws.universe.commons.modules.chat;
 
 import org.bukkit.entity.Player;
 
-public class ChatMessage {
+import java.util.Collection;
 
-    private final Player player;
-    private final String message;
+public interface ChatMessage {
 
-    public ChatMessage(Player player, String message) {
+    void setFormat(String format);
 
-        if(player == null)
-            throw new IllegalArgumentException("Player cannot be null.");
+    void setReceivers(Collection<Player> players);
 
-        if(message == null || message.isEmpty())
-            throw new IllegalArgumentException("Message cannot be null or empty.");
+    Player getSender();
 
-        this.player = player;
-        this.message = message;
-    }
+    String getMessage();
 
-    public Player getPlayer() {
-        return this.player;
-    }
+    String getFormat();
 
-    public String getMessage() {
-        return this.message;
-    }
+    Collection<Player> getReceivers();
 }
