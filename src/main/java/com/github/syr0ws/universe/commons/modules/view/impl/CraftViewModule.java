@@ -6,6 +6,7 @@ import com.github.syr0ws.universe.commons.modules.ModuleException;
 import com.github.syr0ws.universe.commons.modules.view.ViewModule;
 import com.github.syr0ws.universe.commons.modules.view.ViewService;
 import com.github.syr0ws.universe.commons.modules.view.handlers.ActionBarHandler;
+import com.github.syr0ws.universe.commons.modules.view.handlers.NameViewHandler;
 import com.github.syr0ws.universe.commons.modules.view.handlers.ScoreboardHandler;
 import com.github.syr0ws.universe.commons.modules.view.listeners.PlayerListener;
 import com.github.syr0ws.universe.sdk.Game;
@@ -52,5 +53,6 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
         this.service.addViewHandler(new ActionBarHandler(game));
         this.service.addViewHandler(new ScoreboardHandler(game));
+        this.service.addViewHandler(new NameViewHandler(game));
     }
 }
