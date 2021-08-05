@@ -37,7 +37,7 @@ public class EnumSetting<E extends Enum<E>> extends ConfigSetting<Enum<E>> {
 
         @Override
         public EnumSetting<E> build() {
-            return new EnumSetting<E>(
+            return new EnumSetting<>(
                     super.getName(),
                     super.getDefaultValue(),
                     super.getValue(),
