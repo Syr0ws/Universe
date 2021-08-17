@@ -5,6 +5,7 @@ import com.github.syr0ws.universe.commons.modules.ModuleEnum;
 import com.github.syr0ws.universe.commons.modules.ModuleException;
 import com.github.syr0ws.universe.commons.modules.weather.*;
 import com.github.syr0ws.universe.sdk.Game;
+import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
 public class CraftWeatherModule extends GameModule implements WeatherModule {
 
@@ -25,7 +26,7 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
         this.service = new CraftWeatherService(dao, this.model);
         this.service.loadWeathers();
 
-        super.getListenerManager().addListener(new WeatherListener(this.model));
+        this.registerListeners();
     }
 
     @Override
@@ -46,5 +47,11 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     @Override
     public WeatherService getWeatherService() {
         return this.service;
+    }
+
+    private void registerListeners() {
+
+        ListenerManager manager = super.getListenerManager();
+        manager.addListener(new WeatherListener(this.model));
     }
 }
