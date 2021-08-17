@@ -1,6 +1,10 @@
 package com.github.syr0ws.universe.commons.modules.weather;
 
+import org.bukkit.World;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class WeatherListener implements Listener {
 
@@ -14,19 +18,14 @@ public class WeatherListener implements Listener {
         this.model = model;
     }
 
-    /*
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onWeatherChange(WeatherChangeEvent event) {
-
-        System.out.println(event.getWorld().getName());
 
         World world = event.getWorld();
 
-        if(!this.model.hasWeather(world)) return;
+        Weather weather = this.model.getWeather(world).orElse(Weather.NORMAL);
 
-        Weather weather = this.model.getWeather(world);
-
-        if(weather != Weather.NORMAL) event.setCancelled(true);
+        // toWeatherState() is true when weather will be rainy.
+        if(weather == Weather.SUNNY && event.toWeatherState()) event.setCancelled(true);
     }
-     */
 }
