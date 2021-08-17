@@ -3,7 +3,6 @@ package com.github.syr0ws.universe.commons.modules.weather;
 import org.bukkit.World;
 
 import java.util.Map;
-import java.util.Optional;
 
 public interface WeatherModel {
 
@@ -13,7 +12,7 @@ public interface WeatherModel {
 
     boolean hasWeather(World world);
 
-    Optional<Weather> getWeather(World world);
+    Weather getWeather(World world);
 
     Map<World, Weather> getWorldWeathers();
 }
