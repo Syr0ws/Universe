@@ -5,8 +5,8 @@ import com.github.syr0ws.universe.commons.modules.lang.LangService;
 public abstract class Title extends TextDisplay {
 
     public static final int DEFAULT_FADE_IN = 10;
-    public static final int DEFAULT_STAY = 20;
-    public static final int DEFAULT_FADE_OUT = 70;
+    public static final int DEFAULT_STAY = 70;
+    public static final int DEFAULT_FADE_OUT = 20;
 
     private final String title, subtitle;
     private final int fadeIn, fadeOut, stay;
