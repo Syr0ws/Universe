@@ -2,11 +2,13 @@ package com.github.syr0ws.universe.commons.modules.weather.impl;
 
 import com.github.syr0ws.universe.commons.modules.weather.Weather;
 import com.github.syr0ws.universe.commons.modules.weather.WeatherModel;
+import com.github.syr0ws.universe.commons.modules.weather.WeatherUtils;
 import org.bukkit.World;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CraftWeatherModel implements WeatherModel {
 
@@ -24,25 +26,11 @@ public class CraftWeatherModel implements WeatherModel {
         if(this.hasWeather(world))
             this.removeWeather(world);
 
-        world.setWeatherDuration(weather == Weather.NORMAL ? 0 : Integer.MAX_VALUE);
-        world.setThunderDuration(weather == Weather.NORMAL ? 0 : Integer.MAX_VALUE);
-
-        switch (weather) {
-            case SUNNY:
-                world.setStorm(false);
-                world.setThundering(false);
-                break;
-            case RAIN:
-                world.setStorm(true);
-                world.setThundering(false);
-                break;
-            case THUNDER:
-                world.setStorm(true);
-                world.setThundering(true);
-                break;
-        }
-
+        // Storing world weather.
         this.worldWeathers.put(world, weather);
+
+        // Setting in game weather.
+        WeatherUtils.setWeather(world, weather);
     }
 
     @Override
@@ -67,12 +55,8 @@ public class CraftWeatherModel implements WeatherModel {
     }
 
     @Override
-    public Weather getWeather(World world) {
-
-        if(!this.hasWeather(world))
-            throw new IllegalArgumentException("World doesn't have weather.");
-
-        return this.worldWeathers.get(world);
+    public Optional<Weather> getWeather(World world) {
+        return Optional.ofNullable(this.worldWeathers.get(world));
     }
 
     @Override
