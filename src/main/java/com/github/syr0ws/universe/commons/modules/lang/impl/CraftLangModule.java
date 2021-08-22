@@ -28,7 +28,11 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void load() {
+    }
+
+    @Override
+    public void enable() {
 
         FileConfiguration config = this.getConfig();
 
@@ -39,13 +43,18 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void disable() throws ModuleException {
+    public void disable() {
 
     }
 
     @Override
     public String getName() {
         return ModuleEnum.LANG_MODULE.getName();
+    }
+
+    @Override
+    public boolean useDefaultConfig() {
+        return true;
     }
 
     @Override

@@ -27,6 +27,11 @@ public class CraftCombatModule extends GameModule implements CombatModule {
     }
 
     @Override
+    public void load() {
+        super.loadConfig();
+    }
+
+    @Override
     public void enable() {
 
         // Handling settings.
@@ -54,6 +59,16 @@ public class CraftCombatModule extends GameModule implements CombatModule {
     @Override
     public String getName() {
         return ModuleEnum.COMBAT_MODULE.getName();
+    }
+
+    @Override
+    public String getConfigName() {
+        return "combat-module.yml";
+    }
+
+    @Override
+    public boolean useDefaultConfig() {
+        return true;
     }
 
     @Override

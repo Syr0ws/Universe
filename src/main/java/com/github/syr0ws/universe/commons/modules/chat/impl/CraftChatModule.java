@@ -19,15 +19,19 @@ public class CraftChatModule extends GameModule implements ChatModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void load() {
+
+    }
+
+    @Override
+    public void enable() {
 
         ListenerManager manager = super.getListenerManager();
         manager.addListener(new ChatListener(this.model));
     }
 
     @Override
-    public void disable() throws ModuleException {
-
+    public void disable() {
         super.getListenerManager().removeListeners();
     }
 

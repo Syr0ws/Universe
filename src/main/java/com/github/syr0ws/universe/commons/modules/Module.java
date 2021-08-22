@@ -2,9 +2,11 @@ package com.github.syr0ws.universe.commons.modules;
 
 public interface Module {
 
-    void enable() throws ModuleException;
+    void load();
 
-    void disable() throws ModuleException;
+    void enable();
+
+    void disable();
 
     String getName();
 }
