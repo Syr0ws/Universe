@@ -1,0 +1,13 @@
+#############################################
+###           COMBAT SETTINGS             ###
+#############################################
+
+# This section contains all the settings about the combat module.
+combat-module:
+  # The duration of a combat between two players. If a player disconnect
+  # while he's in combat, he will be automatically killed.
+  # Available values: A number >= 0.
+  combat-duration: 15
+  # Make a player to be killed when he disconnected while being in combat.
+  # Available values: true / false.
+  die-on-combat-disconnection: true
