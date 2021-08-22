@@ -12,12 +12,9 @@ public class GameModuleService implements ModuleService {
         if(this.isEnabled(module.getName()))
             throw new UnsupportedOperationException(String.format("Module '%s' is already enabled.", module.getName()));
 
-        try {
+        this.modules.add(module);
 
-            module.enable();
-            this.modules.add(module);
-
-        } catch (ModuleException e) { e.printStackTrace(); }
+        module.enable();
     }
 
     @Override
@@ -30,10 +27,9 @@ public class GameModuleService implements ModuleService {
 
         Module module = optional.get();
 
-        try { module.disable();
-        } catch (ModuleException e) { e.printStackTrace(); }
-
         this.modules.remove(module);
+
+        module.disable();
     }
 
     @Override
