@@ -53,6 +53,11 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
+    public boolean useDefaultConfig() {
+        return true;
+    }
+
+    @Override
     public LangModel getLangModel() {
         return this.model;
     }
