@@ -29,7 +29,6 @@ public class CraftLangModule extends GameModule implements LangModule {
 
     @Override
     public void load() {
-        super.loadConfig();
     }
 
     @Override
@@ -51,16 +50,6 @@ public class CraftLangModule extends GameModule implements LangModule {
     @Override
     public String getName() {
         return ModuleEnum.LANG_MODULE.getName();
-    }
-
-    @Override
-    public String getConfigName() {
-        return "lang-module.yml";
-    }
-
-    @Override
-    public boolean useDefaultConfig() {
-        return true;
     }
 
     @Override

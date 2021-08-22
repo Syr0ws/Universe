@@ -20,7 +20,7 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
     @Override
     public void load() {
-        super.loadConfig();
+
     }
 
     @Override
@@ -38,16 +38,6 @@ public class CraftChatModule extends GameModule implements ChatModule {
     @Override
     public String getName() {
         return ModuleEnum.CHAT_MODULE.getName();
-    }
-
-    @Override
-    public String getConfigName() {
-        return "chat-module.yml";
-    }
-
-    @Override
-    public boolean useDefaultConfig() {
-        return true;
     }
 
     @Override
