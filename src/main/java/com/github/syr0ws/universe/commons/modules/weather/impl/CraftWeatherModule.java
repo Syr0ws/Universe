@@ -2,7 +2,6 @@ package com.github.syr0ws.universe.commons.modules.weather.impl;
 
 import com.github.syr0ws.universe.commons.modules.GameModule;
 import com.github.syr0ws.universe.commons.modules.ModuleEnum;
-import com.github.syr0ws.universe.commons.modules.ModuleException;
 import com.github.syr0ws.universe.commons.modules.weather.*;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
@@ -17,7 +16,12 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void load() {
+        super.loadConfig();
+    }
+
+    @Override
+    public void enable() {
 
         WeatherDAO dao = new ConfigWeatherDAO(this.getConfig());
 
@@ -30,13 +34,23 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     }
 
     @Override
-    public void disable() throws ModuleException {
+    public void disable() {
 
     }
 
     @Override
     public String getName() {
         return ModuleEnum.WEATHER_MODULE.getName();
+    }
+
+    @Override
+    public String getConfigName() {
+        return "weather-module.yml";
+    }
+
+    @Override
+    public boolean useDefaultConfig() {
+        return true;
     }
 
     @Override

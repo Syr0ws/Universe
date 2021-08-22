@@ -28,7 +28,12 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void load() {
+        super.loadConfig();
+    }
+
+    @Override
+    public void enable() {
 
         FileConfiguration config = this.getConfig();
 
@@ -39,13 +44,23 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void disable() throws ModuleException {
+    public void disable() {
 
     }
 
     @Override
     public String getName() {
         return ModuleEnum.LANG_MODULE.getName();
+    }
+
+    @Override
+    public String getConfigName() {
+        return "lang-module.yml";
+    }
+
+    @Override
+    public boolean useDefaultConfig() {
+        return true;
     }
 
     @Override

@@ -19,7 +19,12 @@ public class CraftBorderModule extends GameModule implements BorderModule {
     }
 
     @Override
-    public void enable() throws ModuleException {
+    public void load() {
+        super.loadConfig();
+    }
+
+    @Override
+    public void enable() {
 
         this.model = new CraftBorderModel();
 
@@ -30,13 +35,23 @@ public class CraftBorderModule extends GameModule implements BorderModule {
     }
 
     @Override
-    public void disable() throws ModuleException {
+    public void disable() {
 
     }
 
     @Override
     public String getName() {
         return ModuleEnum.BORDER_MODULE.getName();
+    }
+
+    @Override
+    public String getConfigName() {
+        return "border-module.yml";
+    }
+
+    @Override
+    public boolean useDefaultConfig() {
+        return true;
     }
 
     @Override
