@@ -39,7 +39,9 @@ public class GameModuleService implements ModuleService {
 
     @Override
     public void disableModules() {
-        this.modules.forEach(module -> this.unregisterModule(module.getName()));
+        // Using a copy to avoid ConcurrentModificationException.
+        List<Module> copy = new ArrayList<>(this.modules);
+        copy.forEach(module -> this.unregisterModule(module.getName()));
     }
 
     @Override
