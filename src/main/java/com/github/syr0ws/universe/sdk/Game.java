@@ -35,6 +35,16 @@ public abstract class Game extends JavaPlugin {
     }
 
     @Override
+    public void onEnable() {
+        this.service.enableModules();
+    }
+
+    @Override
+    public void onDisable() {
+        this.service.disableModules();
+    }
+
+    @Override
     public void saveConfig() {
 
         Path target = Paths.get(this.getDataFolder() + "/" + CONFIG_FILE_NAME);

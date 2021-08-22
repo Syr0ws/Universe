@@ -5,9 +5,11 @@ import java.util.Optional;
 
 public interface ModuleService {
 
-    void enableModule(Module module);
+    void registerModule(Module module);
 
-    void disableModule(String name);
+    void unregisterModule(String name);
+
+    void enableModules();
 
     void disableModules();
 

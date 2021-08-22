@@ -7,18 +7,18 @@ public class GameModuleService implements ModuleService {
     private final List<Module> modules = new ArrayList<>();
 
     @Override
-    public void enableModule(Module module)  {
+    public void registerModule(Module module)  {
 
         if(this.isEnabled(module.getName()))
             throw new UnsupportedOperationException(String.format("Module '%s' is already enabled.", module.getName()));
 
         this.modules.add(module);
 
-        module.enable();
+        module.load();
     }
 
     @Override
-    public void disableModule(String name) {
+    public void unregisterModule(String name) {
 
         Optional<Module> optional = this.getModule(name);
 
@@ -33,8 +33,13 @@ public class GameModuleService implements ModuleService {
     }
 
     @Override
+    public void enableModules() {
+        this.modules.forEach(Module::enable);
+    }
+
+    @Override
     public void disableModules() {
-        this.modules.forEach(module -> this.disableModule(module.getName()));
+        this.modules.forEach(module -> this.unregisterModule(module.getName()));
     }
 
     @Override
