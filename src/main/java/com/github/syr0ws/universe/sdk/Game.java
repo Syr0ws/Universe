@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -49,9 +50,14 @@ public abstract class Game extends JavaPlugin {
 
         Path target = Paths.get(this.getDataFolder() + "/" + CONFIG_FILE_NAME);
 
-        try {
+        // If the config file doesn't exist, creating it.
+        if(!Files.exists(target)) {
 
-            this.handler.save(target);
+            try { this.handler.save(target);
+            } catch (IOException e) { e.printStackTrace(); }
+        }
+
+        try {
 
             this.config = new YamlConfiguration();
             this.config.load(target.toFile());
