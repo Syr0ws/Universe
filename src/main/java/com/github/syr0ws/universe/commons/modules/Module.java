@@ -4,9 +4,9 @@ public interface Module {
 
     void load();
 
-    void enable() throws ModuleException;
+    void enable();
 
-    void disable() throws ModuleException;
+    void disable();
 
     String getName();
 }
