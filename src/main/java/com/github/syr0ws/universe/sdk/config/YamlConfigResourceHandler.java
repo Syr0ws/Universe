@@ -12,12 +12,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class YamlConfigResourceHandler implements ConfigResourceHandler<YamlConfiguration> {
 
     private final Plugin plugin;
-    private final Map<String, String> resources = new HashMap<>();
+    private final Map<String, String> resources = new LinkedHashMap<>();
 
     public YamlConfigResourceHandler(Plugin plugin) {
 
@@ -104,7 +105,7 @@ public class YamlConfigResourceHandler implements ConfigResourceHandler<YamlConf
 
                 String content = this.getResourceContent(resource);
 
-                if(builder.length() > 0) builder.append("\n");
+                if(builder.length() > 0) builder.append("\n\n");
 
                 builder.append(content);
 
