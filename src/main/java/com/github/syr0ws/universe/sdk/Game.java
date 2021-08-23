@@ -1,12 +1,13 @@
 package com.github.syr0ws.universe.sdk;
 
+import com.github.syr0ws.universe.api.GamePlugin;
 import com.github.syr0ws.universe.sdk.config.ConfigResourceHandler;
 import com.github.syr0ws.universe.sdk.config.YamlConfigResourceHandler;
-import com.github.syr0ws.universe.sdk.game.controller.GameController;
-import com.github.syr0ws.universe.sdk.game.model.GameModel;
+import com.github.syr0ws.universe.api.game.controller.GameController;
+import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
-import com.github.syr0ws.universe.commons.modules.GameModuleService;
-import com.github.syr0ws.universe.commons.modules.ModuleService;
+import com.github.syr0ws.universe.sdk.modules.GameModuleService;
+import com.github.syr0ws.universe.api.modules.ModuleService;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public abstract class Game extends JavaPlugin {
+public abstract class Game extends JavaPlugin implements GamePlugin {
 
     private static final String CONFIG_KEY = "main";
     private static final String CONFIG_FILE_NAME = "config.yml";
@@ -79,16 +80,13 @@ public abstract class Game extends JavaPlugin {
         return this.config;
     }
 
-    public abstract GameModel getGameModel();
-
-    public abstract GameController getGameController();
+    @Override
+    public ModuleService getModuleService() {
+        return this.service;
+    }
 
     public ListenerManager getListenerManager() {
         return this.listenerManager;
-    }
-
-    public ModuleService getModuleService() {
-        return this.service;
     }
 
     public ConfigResourceHandler<YamlConfiguration> getConfigHandler() {

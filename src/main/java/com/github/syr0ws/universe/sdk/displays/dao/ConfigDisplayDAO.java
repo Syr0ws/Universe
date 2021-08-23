@@ -1,8 +1,9 @@
 package com.github.syr0ws.universe.sdk.displays.dao;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayException;
-import com.github.syr0ws.universe.sdk.displays.DisplayFactory;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayDAO;
+import com.github.syr0ws.universe.api.displays.DisplayException;
+import com.github.syr0ws.universe.api.displays.DisplayFactory;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;

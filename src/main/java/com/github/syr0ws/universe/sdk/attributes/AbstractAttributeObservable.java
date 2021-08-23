@@ -1,5 +1,9 @@
 package com.github.syr0ws.universe.sdk.attributes;
 
+import com.github.syr0ws.universe.api.attributes.Attribute;
+import com.github.syr0ws.universe.api.attributes.AttributeObservable;
+import com.github.syr0ws.universe.api.attributes.AttributeObserver;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

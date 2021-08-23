@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.displays.types;
 
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;

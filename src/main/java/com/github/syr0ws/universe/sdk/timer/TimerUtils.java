@@ -1,9 +1,9 @@
 package com.github.syr0ws.universe.sdk.timer;
 
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayException;
-import com.github.syr0ws.universe.sdk.displays.DisplayFactory;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayException;
+import com.github.syr0ws.universe.api.displays.DisplayFactory;
 import com.github.syr0ws.universe.sdk.displays.impl.SimpleDisplayFactory;
 import com.github.syr0ws.universe.sdk.timer.actions.DisplayAction;
 import org.bukkit.configuration.ConfigurationSection;

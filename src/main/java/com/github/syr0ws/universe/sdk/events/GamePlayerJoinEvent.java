@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.events;
 
-import com.github.syr0ws.universe.sdk.game.model.GamePlayer;
+import com.github.syr0ws.universe.api.game.model.GamePlayer;
 import org.bukkit.event.HandlerList;
 
 public class GamePlayerJoinEvent extends GamePlayerEvent {

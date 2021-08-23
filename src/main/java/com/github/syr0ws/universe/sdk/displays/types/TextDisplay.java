@@ -1,8 +1,8 @@
 package com.github.syr0ws.universe.sdk.displays.types;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
-import com.github.syr0ws.universe.commons.modules.lang.messages.impl.Text;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
+import com.github.syr0ws.universe.sdk.modules.lang.messages.impl.Text;
 import com.github.syr0ws.universe.sdk.placeholders.PlaceholderContainer;
 
 public abstract class TextDisplay extends PlaceholderContainer implements Display {

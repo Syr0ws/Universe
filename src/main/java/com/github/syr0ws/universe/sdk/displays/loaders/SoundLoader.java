@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.sdk.displays.loaders;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayLoader;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayLoader;
 import com.github.syr0ws.universe.sdk.displays.types.SoundEffect;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;

@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.timer.actions;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
+import com.github.syr0ws.universe.api.displays.Display;
 import com.github.syr0ws.universe.sdk.timer.TimerAction;
 
 public class DisplayAction implements TimerAction {

@@ -1,12 +1,15 @@
 package com.github.syr0ws.universe.sdk.displays;
 
-import com.github.syr0ws.universe.commons.modules.ModuleEnum;
-import com.github.syr0ws.universe.commons.modules.ModuleService;
-import com.github.syr0ws.universe.commons.modules.lang.LangModule;
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayFactory;
+import com.github.syr0ws.universe.api.displays.DisplayManager;
+import com.github.syr0ws.universe.sdk.modules.ModuleEnum;
+import com.github.syr0ws.universe.api.modules.ModuleService;
+import com.github.syr0ws.universe.sdk.modules.lang.LangModule;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.displays.dao.ConfigDisplayDAO;
-import com.github.syr0ws.universe.sdk.displays.dao.DisplayDAO;
+import com.github.syr0ws.universe.api.displays.DisplayDAO;
 import com.github.syr0ws.universe.sdk.displays.impl.SimpleDisplayFactory;
 import com.github.syr0ws.universe.sdk.displays.impl.SimpleDisplayManager;
 import com.github.syr0ws.universe.sdk.displays.types.TextDisplay;
