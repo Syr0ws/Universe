@@ -1,13 +1,12 @@
 package com.github.syr0ws.universe.sdk.game.cycle;
 
+import com.github.syr0ws.universe.api.attributes.Attribute;
+import com.github.syr0ws.universe.api.game.controller.GameController;
+import com.github.syr0ws.universe.api.game.controller.cycle.GameCycle;
+import com.github.syr0ws.universe.api.game.controller.cycle.GameCycleException;
+import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
-import com.github.syr0ws.universe.api.game.controller.GameController;
-import com.github.syr0ws.universe.api.game.cycle.GameCycle;
-import com.github.syr0ws.universe.api.game.cycle.GameCycleAttribute;
-import com.github.syr0ws.universe.api.game.cycle.GameCycleException;
-import com.github.syr0ws.universe.api.game.cycle.GameCycleState;
-import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
 public abstract class DefaultGameCycle extends AbstractAttributeObservable implements GameCycle {
@@ -39,32 +38,14 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
     }
 
     @Override
-    public void load() {
-        this.setState(GameCycleState.LOADED);
+    public void enable() {
+        this.setState(GameCycleState.ENABLED);
     }
 
     @Override
-    public void unload() {
-
-        // Automatically remove listeners.
+    public void disable() {
         this.listenerManager.removeListeners();
-
-        this.setState(GameCycleState.UNLOADED);
-    }
-
-    @Override
-    public void start() {
-        this.setState(GameCycleState.STARTED);
-    }
-
-    @Override
-    public void stop() {
-        this.setState(GameCycleState.STOPPED);
-    }
-
-    @Override
-    public GameCycleState getCycleState() {
-        return this.state;
+        this.setState(GameCycleState.DISABLED);
     }
 
     protected void done() {
@@ -93,6 +74,19 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
             throw new GameCycleException(String.format("State '%s' is not the next state of '%s'.", state.name(), this.state.name()));
 
         this.state = state;
-        this.notifyChange(GameCycleAttribute.STATE_CHANGE);
+    }
+
+    private enum GameCycleState {
+
+        WAITING, ENABLED, DISABLED;
+
+        public boolean isNext(GameCycleState state) {
+            return state.ordinal() == this.ordinal() + 1;
+        }
+    }
+
+    public enum GameCycleAttribute implements Attribute {
+
+        DONE;
     }
 }

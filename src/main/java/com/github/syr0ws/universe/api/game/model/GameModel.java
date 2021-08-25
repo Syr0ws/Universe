@@ -1,8 +1,7 @@
 package com.github.syr0ws.universe.api.game.model;
 
-import com.github.syr0ws.universe.api.game.cycle.GameCycle;
-import com.github.syr0ws.universe.api.game.settings.GameSettings;
 import com.github.syr0ws.universe.api.attributes.AttributeObservable;
+import com.github.syr0ws.universe.api.game.settings.GameSettings;
 import org.bukkit.Location;
 
 import java.util.Collection;
@@ -36,8 +35,6 @@ public interface GameModel extends AttributeObservable {
     GameSettings getSettings();
 
     GameState getState();
-
-    GameCycle getCycle();
 
     GamePlayer getPlayer(UUID uuid);
 

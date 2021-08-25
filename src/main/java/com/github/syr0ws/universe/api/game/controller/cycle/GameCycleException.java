@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.api.game.cycle;
+package com.github.syr0ws.universe.api.game.controller.cycle;
 
 public class GameCycleException extends RuntimeException {
 

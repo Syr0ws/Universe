@@ -1,24 +1,24 @@
 package com.github.syr0ws.universe.sdk.game.controller;
 
-import com.github.syr0ws.universe.sdk.game.mode.DefaultModeManager;
-import com.github.syr0ws.universe.sdk.game.model.DefaultGameModel;
-import com.github.syr0ws.universe.sdk.game.model.DefaultGamePlayer;
-import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.api.attributes.Attribute;
 import com.github.syr0ws.universe.api.attributes.AttributeObserver;
-import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
-import com.github.syr0ws.universe.sdk.events.GamePlayerModeChangeEvent;
-import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
 import com.github.syr0ws.universe.api.game.controller.GameController;
-import com.github.syr0ws.universe.api.game.cycle.GameCycle;
-import com.github.syr0ws.universe.api.game.cycle.GameCycleAttribute;
-import com.github.syr0ws.universe.api.game.cycle.GameCycleFactory;
+import com.github.syr0ws.universe.api.game.controller.cycle.GameCycle;
+import com.github.syr0ws.universe.api.game.controller.cycle.GameCycleFactory;
 import com.github.syr0ws.universe.api.game.mode.Mode;
 import com.github.syr0ws.universe.api.game.mode.ModeManager;
 import com.github.syr0ws.universe.api.game.mode.ModeType;
 import com.github.syr0ws.universe.api.game.model.GameException;
 import com.github.syr0ws.universe.api.game.model.GamePlayer;
 import com.github.syr0ws.universe.api.game.model.GameState;
+import com.github.syr0ws.universe.sdk.Game;
+import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
+import com.github.syr0ws.universe.sdk.events.GamePlayerModeChangeEvent;
+import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
+import com.github.syr0ws.universe.sdk.game.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.mode.DefaultModeManager;
+import com.github.syr0ws.universe.sdk.game.model.DefaultGameModel;
+import com.github.syr0ws.universe.sdk.game.model.DefaultGamePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,6 +36,8 @@ public abstract class DefaultGameController implements GameController, Attribute
     private final DefaultGameModel model;
     private final DefaultModeManager modeManager;
 
+    private GameCycle cycle;
+
     public DefaultGameController(Game game, DefaultGameModel model) {
 
         if(game == null)
@@ -52,6 +54,16 @@ public abstract class DefaultGameController implements GameController, Attribute
     }
 
     public abstract GameCycleFactory getCycleFactory();
+
+    @Override
+    public void enable() {
+        this.setGameState(GameState.WAITING);
+    }
+
+    @Override
+    public void disable() {
+        this.disableCurrentCycle();
+    }
 
     @Override
     public void setMode(GamePlayer player, ModeType type) {
@@ -117,7 +129,24 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     @Override
     public Collection<Attribute> observed() {
-        return Collections.singleton(GameCycleAttribute.DONE);
+        return Collections.singleton(DefaultGameCycle.GameCycleAttribute.DONE);
+    }
+
+    protected void setGameState(GameState state) {
+
+        // Disabling current cycle.
+        this.disableCurrentCycle();
+
+        GameCycleFactory factory = this.getCycleFactory();
+
+        // As factory is defined in a child class, it's better to check that it is valid.
+        if(factory == null)
+            throw new NullPointerException("GameCycleFactory is null.");
+
+        GameCycle cycle = factory.getGameCycle(state);
+
+        // Enabling the new GameCycle.
+        this.enableCycle(cycle);
     }
 
     private void onPlayerJoin(Player player) {
@@ -164,33 +193,21 @@ public abstract class DefaultGameController implements GameController, Attribute
         mode.disable(player);
     }
 
-    protected void setGameState(GameState state) {
-
-        // Actions on the old GameCycle.
-        GameCycle current = this.model.getCycle();
-
-        // Disabling cycle only if it exists.
-        if(current != null) this.disableCycle(current);
-
-        // Actions on the new GameCycle.
-        GameCycle cycle = this.getCycleFactory().getGameCycle(state);
-        this.enableCycle(cycle);
-    }
-
     private void enableCycle(GameCycle cycle) {
 
-        this.model.setCycle(cycle);
-
-        cycle.load(); // Loading cycle.
-        cycle.start(); // Starting cycle.
-        cycle.addObserver(this); // Adding observer.
+        this.cycle = cycle;
+        this.cycle.addObserver(this); // Adding observer.
+        this.cycle.enable(); // Enabling the cycle.
     }
 
-    private void disableCycle(GameCycle cycle) {
+    private void disableCurrentCycle() {
 
-        cycle.stop();
-        cycle.unload(); // Unloading cycle.
-        cycle.removeObserver(this); // Removing observer.
+        // Checking if a cycle is enabled.
+        if(this.cycle == null) return;
+
+        this.cycle.disable(); // Disabling the cycle.
+        this.cycle.removeObserver(this); // Removing observer.
+        this.cycle = null; // Avoid reuse.
     }
 
     private class GameListener implements Listener {

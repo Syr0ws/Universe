@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.api.game.cycle;
+package com.github.syr0ws.universe.api.game.controller.cycle;
 
 import com.github.syr0ws.universe.api.game.model.GameState;
 

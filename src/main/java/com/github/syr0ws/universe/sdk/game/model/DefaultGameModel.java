@@ -1,12 +1,11 @@
 package com.github.syr0ws.universe.sdk.game.model;
 
-import com.github.syr0ws.universe.api.game.settings.GameSettings;
-import com.github.syr0ws.universe.api.settings.MutableSetting;
-import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
-import com.github.syr0ws.universe.api.game.cycle.GameCycle;
 import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.api.game.model.GamePlayer;
 import com.github.syr0ws.universe.api.game.model.GameState;
+import com.github.syr0ws.universe.api.game.settings.GameSettings;
+import com.github.syr0ws.universe.api.settings.MutableSetting;
+import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -18,7 +17,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
     private final GameSettings settings;
     private final Map<UUID, DefaultGamePlayer> players = new HashMap<>();
 
-    private GameCycle cycle;
+    private GameState state;
     private int time;
 
     public DefaultGameModel(GameSettings settings) {
@@ -58,14 +57,13 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
         this.notifyChange(GameAttribute.GAME_PLAYER_CHANGE);
     }
 
-    public void setCycle(GameCycle cycle) {
+    public void setState(GameState state) {
 
-        if(cycle == null)
-            throw new IllegalArgumentException("GameCycle cannot be null.");
+        if(state == null)
+            throw new IllegalArgumentException("GameState cannot be null.");
 
-        this.cycle = cycle;
+        this.state = state;
         this.notifyChange(GameAttribute.STATE_CHANGE);
-        this.notifyChange(GameAttribute.CYCLE_CHANGE);
     }
 
     @Override
@@ -127,12 +125,7 @@ public abstract class DefaultGameModel extends AbstractAttributeObservable imple
 
     @Override
     public GameState getState() {
-        return this.cycle.getGameState();
-    }
-
-    @Override
-    public GameCycle getCycle() {
-        return this.cycle;
+        return this.state;
     }
 
     @Override

@@ -15,9 +15,9 @@ public class RunningCycle extends DefaultGameCycle {
     }
 
     @Override
-    public void load() {
-        super.load();
+    public void enable() {
         this.registerListeners();
+        super.enable();
     }
 
     @Override
