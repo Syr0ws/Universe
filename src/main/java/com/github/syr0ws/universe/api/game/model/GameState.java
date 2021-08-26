@@ -1,18 +1,16 @@
 package com.github.syr0ws.universe.api.game.model;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public enum GameState {
 
-    WAITING, STARTING, RUNNING, FINISHED;
+    LOADING, WAITING, STARTING, RUNNING, FINISHED;
 
     public Optional<GameState> getNext() {
 
-        int next = this.ordinal() + 1;
+        GameState[] states = values();
+        int index = this.ordinal() + 1;
 
-        return Arrays.stream(GameState.values())
-                .filter(state -> state.ordinal() == next)
-                .findFirst();
+        return index < states.length ? Optional.of(states[index]) : Optional.empty();
     }
 }
