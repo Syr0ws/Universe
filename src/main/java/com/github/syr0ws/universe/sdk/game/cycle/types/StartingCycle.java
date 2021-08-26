@@ -9,27 +9,20 @@ import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.api.game.model.GameState;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
-public class StartingCycle extends DefaultGameCycle {
+public abstract class StartingCycle extends DefaultGameCycle {
 
     public StartingCycle(Game game, GameModel model, GameController controller) {
         super(game, model, controller);
     }
 
     @Override
-    public void enable() {
-        this.registerListeners();
-        super.enable();
+    public void registerListeners(ListenerManager manager) {
+        manager.addListener(new PreRunningListener(super.getModel(), super.getController()));
+        manager.addListener(new StartingListener(super.getModel(), super.getController()));
     }
 
     @Override
     public GameState getGameState() {
         return GameState.STARTING;
-    }
-
-    private void registerListeners() {
-
-        ListenerManager manager = super.getListenerManager();
-        manager.addListener(new PreRunningListener(super.getModel(), super.getController()));
-        manager.addListener(new StartingListener(super.getModel(), super.getController()));
     }
 }
