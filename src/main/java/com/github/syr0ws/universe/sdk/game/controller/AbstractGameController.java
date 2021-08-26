@@ -145,6 +145,8 @@ public abstract class AbstractGameController implements GameController, Attribut
 
         GameCycle cycle = factory.getGameCycle(state);
 
+        this.model.setState(state);
+
         // Enabling the new GameCycle.
         this.enableCycle(cycle);
     }
