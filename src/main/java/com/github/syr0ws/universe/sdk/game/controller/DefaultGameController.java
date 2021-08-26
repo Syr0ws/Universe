@@ -57,7 +57,7 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     @Override
     public void enable() {
-        this.setGameState(GameState.WAITING);
+        this.setGameState(GameState.LOADING);
     }
 
     @Override
