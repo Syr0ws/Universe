@@ -1,4 +1,4 @@
-package com.github.syr0ws.universe.sdk.game.cycle;
+package com.github.syr0ws.universe.sdk.game.controller.cycle;
 
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.tools.Task;

@@ -1,6 +1,6 @@
-package com.github.syr0ws.universe.sdk.game.cycle.types;
+package com.github.syr0ws.universe.sdk.game.controller.cycle.types;
 
-import com.github.syr0ws.universe.sdk.game.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.api.game.controller.GameController;
 import com.github.syr0ws.universe.api.game.model.GameModel;

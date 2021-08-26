@@ -15,7 +15,7 @@ import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerModeChangeEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
-import com.github.syr0ws.universe.sdk.game.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.sdk.game.mode.DefaultModeManager;
 import com.github.syr0ws.universe.sdk.game.model.DefaultGameModel;
 import com.github.syr0ws.universe.sdk.game.model.DefaultGamePlayer;

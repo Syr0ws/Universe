@@ -1,6 +1,6 @@
-package com.github.syr0ws.universe.sdk.game.cycle.types;
+package com.github.syr0ws.universe.sdk.game.controller.cycle.types;
 
-import com.github.syr0ws.universe.sdk.game.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
 import com.github.syr0ws.universe.sdk.listeners.PreRunningListener;
 import com.github.syr0ws.universe.sdk.listeners.WaitingListener;
 import com.github.syr0ws.universe.sdk.Game;
