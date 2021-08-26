@@ -39,6 +39,7 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
 
     @Override
     public void enable() {
+        this.registerListeners(this.listenerManager);
         this.setState(GameCycleState.ENABLED);
     }
 
@@ -47,6 +48,8 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
         this.listenerManager.removeListeners();
         this.setState(GameCycleState.DISABLED);
     }
+
+    public void registerListeners(ListenerManager manager) {}
 
     protected void done() {
         this.notifyChange(GameCycleAttribute.DONE);
