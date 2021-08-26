@@ -1,7 +1,7 @@
 package com.github.syr0ws.universe.sdk.game.controller.cycle.types;
 
 import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
-import com.github.syr0ws.universe.sdk.listeners.RunningListener;
+import com.github.syr0ws.universe.sdk.listeners.GameRunningListener;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.api.game.controller.GameController;
 import com.github.syr0ws.universe.api.game.model.GameModel;
@@ -16,7 +16,7 @@ public abstract class RunningCycle extends DefaultGameCycle {
 
     @Override
     public void registerListeners(ListenerManager manager) {
-        manager.addListener(new RunningListener(super.getModel(), super.getController()));
+        manager.addListener(new GameRunningListener(super.getModel(), super.getController()));
     }
 
     @Override

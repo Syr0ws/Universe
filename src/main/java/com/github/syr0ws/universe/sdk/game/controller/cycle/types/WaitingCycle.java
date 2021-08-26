@@ -1,8 +1,8 @@
 package com.github.syr0ws.universe.sdk.game.controller.cycle.types;
 
 import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
-import com.github.syr0ws.universe.sdk.listeners.PreRunningListener;
-import com.github.syr0ws.universe.sdk.listeners.WaitingListener;
+import com.github.syr0ws.universe.sdk.listeners.GamePreRunningListener;
+import com.github.syr0ws.universe.sdk.listeners.GameWaitingListener;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.api.game.controller.GameController;
 import com.github.syr0ws.universe.api.game.model.GameModel;
@@ -17,8 +17,8 @@ public abstract class WaitingCycle extends DefaultGameCycle {
 
     @Override
     public void registerListeners(ListenerManager manager) {
-        manager.addListener(new PreRunningListener(super.getModel(), super.getController()));
-        manager.addListener(new WaitingListener(super.getModel(), super.getController()));
+        manager.addListener(new GamePreRunningListener(super.getModel(), super.getController()));
+        manager.addListener(new GameWaitingListener(super.getModel(), super.getController()));
     }
 
     @Override

@@ -12,12 +12,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
-public class RunningListener implements Listener {
+public class GameRunningListener implements Listener {
 
     private final GameModel model;
     private final GameController controller;
 
-    public RunningListener(GameModel model, GameController controller) {
+    public GameRunningListener(GameModel model, GameController controller) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");

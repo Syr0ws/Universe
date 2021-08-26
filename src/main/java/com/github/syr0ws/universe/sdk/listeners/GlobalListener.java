@@ -7,11 +7,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-public class GameListener implements Listener {
+public class GlobalListener implements Listener {
 
     private final GameModel model;
 
-    public GameListener(GameModel model) {
+    public GlobalListener(GameModel model) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");

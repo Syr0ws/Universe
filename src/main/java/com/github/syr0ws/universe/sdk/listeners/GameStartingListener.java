@@ -10,12 +10,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-public class StartingListener implements Listener {
+public class GameStartingListener implements Listener {
 
     private final GameModel model;
     private final GameController controller;
 
-    public StartingListener(GameModel model, GameController controller) {
+    public GameStartingListener(GameModel model, GameController controller) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");

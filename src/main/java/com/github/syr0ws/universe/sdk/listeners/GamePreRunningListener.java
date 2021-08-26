@@ -23,12 +23,12 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 
-public class PreRunningListener implements Listener {
+public class GamePreRunningListener implements Listener {
 
     private final GameModel model;
     private final GameController controller;
 
-    public PreRunningListener(GameModel model, GameController controller) {
+    public GamePreRunningListener(GameModel model, GameController controller) {
 
         if(model == null)
             throw new IllegalArgumentException("GameModel cannot be null.");
