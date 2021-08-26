@@ -15,7 +15,7 @@ import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.events.GamePlayerJoinEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerModeChangeEvent;
 import com.github.syr0ws.universe.sdk.events.GamePlayerQuitEvent;
-import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.controller.cycle.AbstractGameCycle;
 import com.github.syr0ws.universe.sdk.game.mode.DefaultModeManager;
 import com.github.syr0ws.universe.sdk.game.model.DefaultGameModel;
 import com.github.syr0ws.universe.sdk.game.model.DefaultGamePlayer;
@@ -31,14 +31,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
-public abstract class DefaultGameController implements GameController, AttributeObserver {
+public abstract class AbstractGameController implements GameController, AttributeObserver {
 
     private final DefaultGameModel model;
     private final DefaultModeManager modeManager;
 
     private GameCycle cycle;
 
-    public DefaultGameController(Game game, DefaultGameModel model) {
+    public AbstractGameController(Game game, DefaultGameModel model) {
 
         if(game == null)
             throw new IllegalArgumentException("Game cannot be null.");
@@ -129,7 +129,7 @@ public abstract class DefaultGameController implements GameController, Attribute
 
     @Override
     public Collection<Attribute> observed() {
-        return Collections.singleton(DefaultGameCycle.GameCycleAttribute.DONE);
+        return Collections.singleton(AbstractGameCycle.GameCycleAttribute.DONE);
     }
 
     protected void setGameState(GameState state) {
@@ -214,12 +214,12 @@ public abstract class DefaultGameController implements GameController, Attribute
 
         @EventHandler
         public void onPlayerJoin(PlayerJoinEvent event) {
-            DefaultGameController.this.onPlayerJoin(event.getPlayer());
+            AbstractGameController.this.onPlayerJoin(event.getPlayer());
         }
 
         @EventHandler
         public void onPlayerQuit(PlayerQuitEvent event) {
-            DefaultGameController.this.onPlayerQuit(event.getPlayer());
+            AbstractGameController.this.onPlayerQuit(event.getPlayer());
         }
     }
 

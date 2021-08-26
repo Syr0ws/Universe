@@ -9,7 +9,7 @@ import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.attributes.AbstractAttributeObservable;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
-public abstract class DefaultGameCycle extends AbstractAttributeObservable implements GameCycle {
+public abstract class AbstractGameCycle extends AbstractAttributeObservable implements GameCycle {
 
     private final Game game;
     private final GameModel model;
@@ -18,7 +18,7 @@ public abstract class DefaultGameCycle extends AbstractAttributeObservable imple
     private final ListenerManager listenerManager;
     private GameCycleState state;
 
-    public DefaultGameCycle(Game game, GameModel model, GameController controller) {
+    public AbstractGameCycle(Game game, GameModel model, GameController controller) {
 
         if(game == null)
             throw new IllegalArgumentException("Game cannot be null.");

@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.game.controller.cycle.types;
 
-import com.github.syr0ws.universe.sdk.game.controller.cycle.DefaultGameCycle;
+import com.github.syr0ws.universe.sdk.game.controller.cycle.AbstractGameCycle;
 import com.github.syr0ws.universe.sdk.listeners.GamePreRunningListener;
 import com.github.syr0ws.universe.sdk.listeners.GameStartingListener;
 import com.github.syr0ws.universe.sdk.Game;
@@ -9,9 +9,9 @@ import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.api.game.model.GameState;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 
-public abstract class StartingCycle extends DefaultGameCycle {
+public abstract class GameStartingCycle extends AbstractGameCycle {
 
-    public StartingCycle(Game game, GameModel model, GameController controller) {
+    public GameStartingCycle(Game game, GameModel model, GameController controller) {
         super(game, model, controller);
     }
 
