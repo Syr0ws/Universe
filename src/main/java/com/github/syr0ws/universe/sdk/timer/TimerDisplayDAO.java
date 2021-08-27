@@ -1,8 +1,8 @@
 package com.github.syr0ws.universe.sdk.timer;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayException;
-import com.github.syr0ws.universe.sdk.displays.DisplayFactory;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayException;
+import com.github.syr0ws.universe.api.displays.DisplayFactory;
 import com.github.syr0ws.universe.sdk.displays.dao.ConfigDisplayDAO;
 import com.github.syr0ws.universe.sdk.tools.Validate;
 import org.bukkit.configuration.ConfigurationSection;

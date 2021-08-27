@@ -1,9 +1,9 @@
 package com.github.syr0ws.universe.sdk.displays.impl;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayException;
-import com.github.syr0ws.universe.sdk.displays.DisplayManager;
-import com.github.syr0ws.universe.sdk.displays.dao.DisplayDAO;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayException;
+import com.github.syr0ws.universe.api.displays.DisplayManager;
+import com.github.syr0ws.universe.api.displays.DisplayDAO;
 
 import java.util.*;
 

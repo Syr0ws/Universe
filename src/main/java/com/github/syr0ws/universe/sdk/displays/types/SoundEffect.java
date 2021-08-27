@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.displays.types;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
+import com.github.syr0ws.universe.api.displays.Display;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

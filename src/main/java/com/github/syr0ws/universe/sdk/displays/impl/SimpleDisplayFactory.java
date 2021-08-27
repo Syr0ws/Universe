@@ -1,13 +1,13 @@
 package com.github.syr0ws.universe.sdk.displays.impl;
 
-import com.github.syr0ws.universe.sdk.displays.Display;
-import com.github.syr0ws.universe.sdk.displays.DisplayFactory;
-import com.github.syr0ws.universe.sdk.displays.DisplayLoader;
+import com.github.syr0ws.universe.api.displays.Display;
+import com.github.syr0ws.universe.api.displays.DisplayFactory;
+import com.github.syr0ws.universe.api.displays.DisplayLoader;
 import com.github.syr0ws.universe.sdk.displays.loaders.ActionBarLoader;
 import com.github.syr0ws.universe.sdk.displays.loaders.MessageLoader;
 import com.github.syr0ws.universe.sdk.displays.loaders.SoundLoader;
 import com.github.syr0ws.universe.sdk.displays.loaders.TitleLoader;
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.Collections;

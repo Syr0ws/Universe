@@ -1,6 +1,6 @@
 package com.github.syr0ws.universe.sdk.displays.types;
 
-import com.github.syr0ws.universe.commons.modules.lang.LangService;
+import com.github.syr0ws.universe.sdk.modules.lang.LangService;
 
 public abstract class Title extends TextDisplay {
 
