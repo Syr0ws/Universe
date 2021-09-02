@@ -4,6 +4,7 @@ import com.github.syr0ws.universe.api.attributes.Attribute;
 import com.github.syr0ws.universe.api.displays.DisplayManager;
 import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.api.game.model.GameState;
+import com.github.syr0ws.universe.api.game.view.GameView;
 import com.github.syr0ws.universe.api.game.view.GameViewHandler;
 import com.github.syr0ws.universe.api.game.view.GameStateViewHandler;
 import com.github.syr0ws.universe.sdk.Game;
@@ -16,9 +17,9 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
 
     private final Game game;
     private final GameModel model;
+    private final DisplayManager manager;
     private final List<GameStateViewHandler> handlers = new ArrayList<>();
 
-    private DisplayManager manager;
     private GameStateViewHandler handler;
 
     public AbstractGameViewHandler(Game game, GameModel model) {
@@ -29,18 +30,32 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
 
         this.game = game;
         this.model = model;
+        this.manager = DisplayUtils.getDisplayManager(this.game);
     }
 
     @Override
     public void enable() {
+
+        // Initializing handler.
         this.model.addObserver(this);
-        this.manager = DisplayUtils.getDisplayManager(this.game);
+
+        // Setting the view handler for the current state.
         this.setViewHandler();
+
+        // Enabling global views.
+        super.getViews().forEach(GameView::enable);
     }
 
     @Override
     public void disable() {
+
+        // Removing the current view handler.
         this.disableCurrentViewHandler();
+
+        // Disabling global views.
+        super.getViews().forEach(GameView::disable);
+
+        // Removing the view handler from the list of observers.
         this.model.removeObserver(this);
     }
 
