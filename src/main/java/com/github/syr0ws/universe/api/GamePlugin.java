@@ -4,8 +4,9 @@ import com.github.syr0ws.universe.api.game.controller.GameController;
 import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.api.game.view.GameViewHandler;
 import com.github.syr0ws.universe.api.modules.ModuleService;
+import org.bukkit.plugin.Plugin;
 
-public interface GamePlugin {
+public interface GamePlugin extends Plugin {
 
     ModuleService getModuleService();
 
