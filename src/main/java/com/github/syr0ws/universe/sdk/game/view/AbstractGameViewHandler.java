@@ -60,6 +60,11 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
     }
 
     @Override
+    public void removeViewHandlers() {
+        new ArrayList<>(this.handlers).forEach(this::removeViewHandler);
+    }
+
+    @Override
     public boolean hasViewHandler(GameStateViewHandler handler) {
         return this.handlers.contains(handler);
     }

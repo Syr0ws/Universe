@@ -12,6 +12,8 @@ public interface GameViewHandler extends ViewHandler, AttributeObserver {
 
     void removeViewHandler(GameStateViewHandler handler);
 
+    void removeViewHandlers();
+
     boolean hasViewHandler(GameStateViewHandler handler);
 
     Optional<GameStateViewHandler> getViewHandler(GameState state);
