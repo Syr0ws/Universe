@@ -18,7 +18,7 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
     private final Game game;
     private final GameModel model;
     private final DisplayManager manager;
-    private final List<GameStateViewHandler> handlers = new ArrayList<>();
+    private final Set<GameStateViewHandler> handlers = new HashSet<>();
 
     private GameStateViewHandler handler;
 
@@ -77,6 +77,10 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
 
     @Override
     public void removeViewHandler(GameStateViewHandler handler) {
+
+        if(handler == null)
+            throw new IllegalArgumentException("GameStateViewHandler cannot be null.");
+
         this.handlers.remove(handler);
     }
 
