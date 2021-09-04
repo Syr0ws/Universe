@@ -1,6 +1,7 @@
 package com.github.syr0ws.universe.sdk;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.config.ConfigResourceHandler;
 import com.github.syr0ws.universe.sdk.config.YamlConfigResourceHandler;
 import com.github.syr0ws.universe.api.game.controller.GameController;
@@ -8,6 +9,7 @@ import com.github.syr0ws.universe.api.game.model.GameModel;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 import com.github.syr0ws.universe.sdk.modules.GameModuleService;
 import com.github.syr0ws.universe.api.modules.ModuleService;
+import com.github.syr0ws.universe.sdk.services.SimpleGameServicesManager;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.ServicesManager;
@@ -24,6 +26,7 @@ public abstract class Game extends JavaPlugin implements GamePlugin {
     private static final String CONFIG_FILE_NAME = "config.yml";
 
     private final ModuleService service;
+    private final GameServicesManager servicesManager;
     private final ListenerManager listenerManager;
 
     private final ConfigResourceHandler<YamlConfiguration> handler;
@@ -31,6 +34,7 @@ public abstract class Game extends JavaPlugin implements GamePlugin {
 
     public Game() {
         this.service = new GameModuleService();
+        this.servicesManager = new SimpleGameServicesManager(this);
         this.listenerManager = new ListenerManager(this);
 
         this.handler = new YamlConfigResourceHandler(this);
@@ -87,8 +91,8 @@ public abstract class Game extends JavaPlugin implements GamePlugin {
     }
 
     @Override
-    public ServicesManager getServicesManager() {
-        return getServer().getServicesManager();
+    public GameServicesManager getServicesManager() {
+        return this.servicesManager;
     }
 
     public ListenerManager getListenerManager() {
