@@ -22,14 +22,20 @@ public abstract class AbstractViewHandler implements ViewHandler {
         this.game = game;
     }
 
+    // Providing an empty method automatically called to register views.
+    // It avoids hesitations in the order to execute the super.enable() instruction.
+    protected void registerViews() {}
+
     @Override
     public void enable() {
-        this.views.forEach(GameView::enable);
+        this.registerViews(); // Registering views.
+        this.views.forEach(GameView::enable); // Enabling views.
     }
 
     @Override
     public void disable() {
-        this.views.forEach(GameView::disable);
+        this.views.forEach(GameView::disable); // Disabling views.
+        this.removeViews(); // Removing views because they're registered in the 'enable()' method.
     }
 
     @Override
