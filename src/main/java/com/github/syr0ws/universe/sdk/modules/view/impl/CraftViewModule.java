@@ -1,6 +1,8 @@
 package com.github.syr0ws.universe.sdk.modules.view.impl;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicePriority;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
 import com.github.syr0ws.universe.sdk.modules.ModuleEnum;
@@ -53,8 +55,8 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
     @Override
     public ViewService getViewService() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(ViewService.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(ViewService.class);
     }
 
     private void bindViewService() {
@@ -63,8 +65,8 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
         ViewService service = new CraftViewService();
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(ViewService.class, service, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(ViewService.class, service, GameServicePriority.NORMAL);
     }
 
     private void registerHandlers() {

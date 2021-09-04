@@ -1,6 +1,8 @@
 package com.github.syr0ws.universe.sdk.modules.chat.impl;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicePriority;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
@@ -44,8 +46,8 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
     @Override
     public ChatModel getChatModel() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(ChatModel.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(ChatModel.class);
     }
 
     private void bindChatModel() {
@@ -54,8 +56,8 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
         ChatModel model = new CraftChatModel();
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(ChatModel.class, model, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(ChatModel.class, model, GameServicePriority.NORMAL);
     }
 
     private void registerListeners() {

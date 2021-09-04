@@ -1,6 +1,8 @@
 package com.github.syr0ws.universe.sdk.modules.border.impl;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicePriority;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
 import com.github.syr0ws.universe.sdk.modules.ModuleEnum;
@@ -51,14 +53,14 @@ public class CraftBorderModule extends GameModule implements BorderModule {
 
     @Override
     public BorderModel getBorderModel() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(BorderModel.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(BorderModel.class);
     }
 
     @Override
     public BorderService getBorderService() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(BorderService.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(BorderService.class);
     }
 
     private void bindBorderModel() {
@@ -66,8 +68,8 @@ public class CraftBorderModule extends GameModule implements BorderModule {
         GamePlugin plugin = super.getGame();
         BorderModel model = new CraftBorderModel();
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(BorderModel.class, model, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(BorderModel.class, model, GameServicePriority.NORMAL);
     }
 
     private void bindBorderService() {
@@ -78,7 +80,7 @@ public class CraftBorderModule extends GameModule implements BorderModule {
         BorderModel model = this.getBorderModel();
         BorderService service = new CraftBorderService(model, dao);
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(BorderService.class, service, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(BorderService.class, service, GameServicePriority.NORMAL);
     }
 }

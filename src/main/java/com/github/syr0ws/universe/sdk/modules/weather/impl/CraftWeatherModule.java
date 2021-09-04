@@ -1,6 +1,8 @@
 package com.github.syr0ws.universe.sdk.modules.weather.impl;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicePriority;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
@@ -57,14 +59,14 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
 
     @Override
     public WeatherModel getWeatherModel() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(WeatherModel.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(WeatherModel.class);
     }
 
     @Override
     public WeatherService getWeatherService() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(WeatherService.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(WeatherService.class);
     }
 
     private void bindWeatherModel() {
@@ -72,8 +74,8 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
         GamePlugin plugin = super.getGame();
         WeatherModel model = new CraftWeatherModel();
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(WeatherModel.class, model, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(WeatherModel.class, model, GameServicePriority.NORMAL);
     }
 
     private void bindWeatherService() {
@@ -84,8 +86,8 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
         WeatherModel model = this.getWeatherModel();
         WeatherService service = new CraftWeatherService(dao, model);
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(WeatherService.class, service, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(WeatherService.class, service, GameServicePriority.NORMAL);
     }
 
     private void registerListeners() {

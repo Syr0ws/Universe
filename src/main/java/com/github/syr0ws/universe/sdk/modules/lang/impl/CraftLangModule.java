@@ -1,6 +1,8 @@
 package com.github.syr0ws.universe.sdk.modules.lang.impl;
 
 import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.api.services.GameServicePriority;
+import com.github.syr0ws.universe.api.services.GameServicesManager;
 import com.github.syr0ws.universe.sdk.Game;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
 import com.github.syr0ws.universe.sdk.modules.ModuleEnum;
@@ -52,14 +54,14 @@ public class CraftLangModule extends GameModule implements LangModule {
 
     @Override
     public LangModel getLangModel() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(LangModel.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(LangModel.class);
     }
 
     @Override
     public LangService getLangService() {
-        ServicesManager manager = super.getGame().getServicesManager();
-        return manager.load(LangService.class);
+        GameServicesManager manager = super.getGame().getServicesManager();
+        return manager.getProvider(LangService.class);
     }
 
     private void bindLangModel() {
@@ -67,8 +69,8 @@ public class CraftLangModule extends GameModule implements LangModule {
         GamePlugin plugin = super.getGame();
         LangModel model = new CraftLangModel();
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(LangModel.class, model, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(LangModel.class, model, GameServicePriority.NORMAL);
     }
 
     private void bindLangService() {
@@ -79,8 +81,8 @@ public class CraftLangModule extends GameModule implements LangModule {
         LangModel model = this.getLangModel();
         LangService service = new CraftLangService(model, dao);
 
-        ServicesManager manager = plugin.getServicesManager();
-        manager.register(LangService.class, service, plugin, ServicePriority.Normal);
+        GameServicesManager manager = plugin.getServicesManager();
+        manager.register(LangService.class, service, GameServicePriority.NORMAL);
     }
 
     private void loadLang() {
