@@ -33,30 +33,36 @@ public abstract class AbstractGameViewHandler extends AbstractViewHandler implem
         this.manager = DisplayUtils.getDisplayManager(this.game);
     }
 
+    // Providing an empty method automatically called to register view handlers.
+    // It avoids hesitations in the order to execute the super.enable() instruction.
+    protected void registerViewHandlers() {}
+
     @Override
     public void enable() {
+        super.enable(); // Enabling global views.
 
-        // Initializing handler.
+        // Adding the object to the list of observers.
         this.model.addObserver(this);
+
+        // Registering view handlers.
+        this.registerViewHandlers();
 
         // Setting the view handler for the current state.
         this.setViewHandler();
-
-        // Enabling global views.
-        super.getViews().forEach(GameView::enable);
     }
 
     @Override
     public void disable() {
+        super.disable(); // Disabling global views.
 
-        // Removing the current view handler.
+        // Removing the object from the observers.
+        this.model.removeObserver(this);
+
+        // Disabling the current view handler.
         this.disableCurrentViewHandler();
 
-        // Disabling global views.
-        super.getViews().forEach(GameView::disable);
-
-        // Removing the view handler from the list of observers.
-        this.model.removeObserver(this);
+        // Removing view handlers because they're registered in the 'enable()' method.
+        this.removeViewHandlers();
     }
 
     @Override
