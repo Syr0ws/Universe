@@ -4,15 +4,12 @@ import com.github.syr0ws.universe.api.game.view.GameView;
 import com.github.syr0ws.universe.api.game.view.ViewHandler;
 import com.github.syr0ws.universe.sdk.Game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public abstract class AbstractViewHandler implements ViewHandler {
 
     private final Game game;
-    private final List<GameView> views = new ArrayList<>();
+    private final Set<GameView> views = new HashSet<>();
 
     public AbstractViewHandler(Game game) {
 
@@ -56,7 +53,7 @@ public abstract class AbstractViewHandler implements ViewHandler {
         if(view == null)
             throw new IllegalArgumentException("View cannot be null.");
 
-        boolean removed = this.views.remove(view);
+        this.views.remove(view);
     }
 
     @Override
