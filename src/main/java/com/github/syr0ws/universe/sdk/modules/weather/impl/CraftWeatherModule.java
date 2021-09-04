@@ -1,15 +1,15 @@
 package com.github.syr0ws.universe.sdk.modules.weather.impl;
 
+import com.github.syr0ws.universe.api.GamePlugin;
+import com.github.syr0ws.universe.sdk.Game;
+import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
 import com.github.syr0ws.universe.sdk.modules.GameModule;
 import com.github.syr0ws.universe.sdk.modules.ModuleEnum;
 import com.github.syr0ws.universe.sdk.modules.weather.*;
-import com.github.syr0ws.universe.sdk.Game;
-import com.github.syr0ws.universe.sdk.listeners.ListenerManager;
+import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.ServicesManager;
 
 public class CraftWeatherModule extends GameModule implements WeatherModule {
-
-    private WeatherModel model;
-    private WeatherService service;
 
     public CraftWeatherModule(Game game) {
         super(game);
@@ -23,14 +23,16 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     @Override
     public void enable() {
 
-        WeatherDAO dao = new ConfigWeatherDAO(this.getConfig());
+        // Binding classes.
+        this.bindWeatherModel();
+        this.bindWeatherService();
 
-        this.model = new CraftWeatherModel();
-
-        this.service = new CraftWeatherService(dao, this.model);
-        this.service.loadWeathers();
-
+        // Registering listeners.
         this.registerListeners();
+
+        // Loading weathers.
+        WeatherService service = this.getWeatherService();
+        service.loadWeathers();
     }
 
     @Override
@@ -55,17 +57,42 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
 
     @Override
     public WeatherModel getWeatherModel() {
-        return this.model;
+        ServicesManager manager = super.getGame().getServicesManager();
+        return manager.load(WeatherModel.class);
     }
 
     @Override
     public WeatherService getWeatherService() {
-        return this.service;
+        ServicesManager manager = super.getGame().getServicesManager();
+        return manager.load(WeatherService.class);
+    }
+
+    private void bindWeatherModel() {
+
+        GamePlugin plugin = super.getGame();
+        WeatherModel model = new CraftWeatherModel();
+
+        ServicesManager manager = plugin.getServicesManager();
+        manager.register(WeatherModel.class, model, plugin, ServicePriority.Normal);
+    }
+
+    private void bindWeatherService() {
+
+        GamePlugin plugin = super.getGame();
+
+        WeatherDAO dao = new ConfigWeatherDAO(super.getConfig());
+        WeatherModel model = this.getWeatherModel();
+        WeatherService service = new CraftWeatherService(dao, model);
+
+        ServicesManager manager = plugin.getServicesManager();
+        manager.register(WeatherService.class, service, plugin, ServicePriority.Normal);
     }
 
     private void registerListeners() {
 
+        WeatherModel model = this.getWeatherModel();
+
         ListenerManager manager = super.getListenerManager();
-        manager.addListener(new WeatherListener(this.model));
+        manager.addListener(new WeatherListener(model));
     }
 }
