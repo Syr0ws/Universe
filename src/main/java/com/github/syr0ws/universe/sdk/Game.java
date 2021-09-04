@@ -10,6 +10,7 @@ import com.github.syr0ws.universe.sdk.modules.GameModuleService;
 import com.github.syr0ws.universe.api.modules.ModuleService;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -83,6 +84,11 @@ public abstract class Game extends JavaPlugin implements GamePlugin {
     @Override
     public ModuleService getModuleService() {
         return this.service;
+    }
+
+    @Override
+    public ServicesManager getServicesManager() {
+        return getServer().getServicesManager();
     }
 
     public ListenerManager getListenerManager() {
