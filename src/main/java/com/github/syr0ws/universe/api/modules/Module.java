@@ -8,5 +8,7 @@ public interface Module {
 
     void disable();
 
+    boolean isEnabled();
+
     String getName();
 }
