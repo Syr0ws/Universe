@@ -30,12 +30,18 @@ public abstract class GameModule implements Module {
     }
 
     @Override
+    public void load() {
+
+    }
+
+    @Override
     public void enable() {
         this.enabled = true;
     }
 
     @Override
     public void disable() {
+        this.listenerManager.removeListeners();
         this.enabled = false;
     }
 
