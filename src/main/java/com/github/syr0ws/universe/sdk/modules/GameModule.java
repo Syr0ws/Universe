@@ -18,6 +18,7 @@ public abstract class GameModule implements Module {
     private final ListenerManager listenerManager;
 
     private YamlConfiguration config;
+    private boolean enabled;
 
     public GameModule(Game game) {
 
@@ -26,6 +27,27 @@ public abstract class GameModule implements Module {
 
         this.game = game;
         this.listenerManager = new ListenerManager(game);
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void enable() {
+        this.enabled = true;
+    }
+
+    @Override
+    public void disable() {
+        this.listenerManager.removeListeners();
+        this.enabled = false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
     public void loadConfig() {

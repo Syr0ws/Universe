@@ -22,12 +22,8 @@ public class CraftViewModule extends GameModule implements ViewModule {
     }
 
     @Override
-    public void load() {
-
-    }
-
-    @Override
     public void enable() {
+        super.enable();
 
         // Registering handlers.
         this.registerHandlers();
@@ -38,6 +34,7 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
     @Override
     public void disable() {
+        super.disable();
 
         // Unregistering handlers.
         this.service.removeViewHandlers();

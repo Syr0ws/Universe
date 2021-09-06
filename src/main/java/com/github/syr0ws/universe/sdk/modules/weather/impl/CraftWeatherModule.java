@@ -19,11 +19,13 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         WeatherDAO dao = new ConfigWeatherDAO(this.getConfig());
 
@@ -33,11 +35,6 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
         this.service.loadWeathers();
 
         this.registerListeners();
-    }
-
-    @Override
-    public void disable() {
-
     }
 
     @Override
