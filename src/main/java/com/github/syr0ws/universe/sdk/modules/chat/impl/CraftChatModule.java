@@ -12,6 +12,8 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
     private final ChatModel model;
 
+    public static final String MODULE_NAME = "ChatModule";
+
     public CraftChatModule(Game game) {
         super(game);
         this.model = new CraftChatModel();
@@ -36,7 +38,7 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.CHAT_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

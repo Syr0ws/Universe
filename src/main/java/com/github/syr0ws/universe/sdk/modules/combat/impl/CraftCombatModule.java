@@ -12,6 +12,8 @@ import com.github.syr0ws.universe.sdk.modules.combat.settings.CraftCombatSetting
 
 public class CraftCombatModule extends GameModule implements CombatModule {
 
+    public static final String MODULE_NAME = "CombatModule";
+
     private final CraftCombatModel model;
     private final CraftCombatService service;
     private final CraftCombatSettings settings;
@@ -58,7 +60,7 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.COMBAT_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

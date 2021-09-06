@@ -13,6 +13,8 @@ public class CraftBorderModule extends GameModule implements BorderModule {
     private BorderModel model;
     private BorderService service;
 
+    public static final String MODULE_NAME = "BorderModule";
+
     public CraftBorderModule(Game game) {
         super(game);
     }
@@ -40,7 +42,7 @@ public class CraftBorderModule extends GameModule implements BorderModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.BORDER_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

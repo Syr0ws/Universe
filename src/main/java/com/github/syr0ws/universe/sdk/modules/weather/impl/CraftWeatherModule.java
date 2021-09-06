@@ -11,6 +11,8 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     private WeatherModel model;
     private WeatherService service;
 
+    public static final String MODULE_NAME = "WeatherModule";
+
     public CraftWeatherModule(Game game) {
         super(game);
     }
@@ -40,7 +42,7 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.WEATHER_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override
