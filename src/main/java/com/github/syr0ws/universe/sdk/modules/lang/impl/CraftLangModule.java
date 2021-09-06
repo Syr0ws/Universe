@@ -29,11 +29,8 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void load() {
-    }
-
-    @Override
     public void enable() {
+        super.enable();
 
         FileConfiguration config = this.getConfig();
 
@@ -41,11 +38,6 @@ public class CraftLangModule extends GameModule implements LangModule {
         Locale locale = Locale.forLanguageTag(lang);
 
         this.service.loadMessages(locale);
-    }
-
-    @Override
-    public void disable() {
-
     }
 
     @Override

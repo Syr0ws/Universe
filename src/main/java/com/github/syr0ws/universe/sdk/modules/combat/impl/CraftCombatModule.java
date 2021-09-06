@@ -30,11 +30,13 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         // Handling settings.
         this.settings.init(super.getGame().getConfig());
@@ -49,10 +51,7 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public void disable() {
-
-        // Handling listeners.
-        ListenerManager listenerManager = super.getListenerManager();
-        listenerManager.removeListeners();
+        super.disable();
 
         // Handling task.
         this.task.stop();

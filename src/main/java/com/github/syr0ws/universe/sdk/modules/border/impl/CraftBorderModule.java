@@ -21,11 +21,13 @@ public class CraftBorderModule extends GameModule implements BorderModule {
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         this.model = new CraftBorderModel();
 
@@ -33,11 +35,6 @@ public class CraftBorderModule extends GameModule implements BorderModule {
 
         this.service = new CraftBorderService(this.model, dao);
         this.service.loadBorders();
-    }
-
-    @Override
-    public void disable() {
-
     }
 
     @Override
