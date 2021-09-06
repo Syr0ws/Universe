@@ -29,7 +29,7 @@ public abstract class Game extends JavaPlugin implements GamePlugin {
     private YamlConfiguration config;
 
     public Game() {
-        this.service = new GameModuleService();
+        this.service = new GameModuleService(this);
         this.listenerManager = new ListenerManager(this);
 
         this.handler = new YamlConfigResourceHandler(this);
