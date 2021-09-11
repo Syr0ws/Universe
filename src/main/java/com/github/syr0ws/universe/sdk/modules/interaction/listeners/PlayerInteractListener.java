@@ -4,10 +4,12 @@ import com.github.syr0ws.universe.sdk.modules.interaction.Interaction;
 import com.github.syr0ws.universe.sdk.modules.interaction.InteractionType;
 import com.github.syr0ws.universe.sdk.modules.interaction.InteractiveArea;
 import com.github.syr0ws.universe.sdk.modules.interaction.InteractiveAreaModel;
+import com.github.syr0ws.universe.sdk.modules.interaction.events.AreaInteractionEvent;
 import com.github.syr0ws.universe.sdk.modules.interaction.impl.CraftInteraction;
 import com.github.syr0ws.universe.sdk.modules.interaction.interactive.InteractiveBlock;
 import com.github.syr0ws.universe.sdk.modules.interaction.interactive.InteractiveEntity;
 import com.github.syr0ws.universe.sdk.modules.interaction.interactive.InteractiveItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -98,7 +100,13 @@ public class PlayerInteractListener implements Listener {
         if(!optional.isPresent()) return true;
 
         InteractiveArea area = optional.get();
+        boolean allowed = area.isAllowed(interaction);
 
-        return area.isAllowed(interaction);
+        AreaInteractionEvent event = new AreaInteractionEvent(area, interaction);
+        event.setCancelled(allowed);
+
+        Bukkit.getPluginManager().callEvent(event);
+
+        return event.isCancelled();
     }
 }
