@@ -7,9 +7,9 @@ import com.github.syr0ws.universe.sdk.modules.interaction.InteractiveData;
 import com.github.syr0ws.universe.sdk.modules.interaction.config.ConfigInteractiveDataDAO;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class InteractionDataSetting extends ConfigSetting<InteractiveData> {
+public class InteractiveDataSetting extends ConfigSetting<InteractiveData> {
 
-    protected InteractionDataSetting(String name, InteractiveData defaultValue, InteractiveData value, SettingFilter<InteractiveData> filter, String path) {
+    protected InteractiveDataSetting(String name, InteractiveData defaultValue, InteractiveData value, SettingFilter<InteractiveData> filter, String path) {
         super(name, defaultValue, value, filter, path);
     }
 
@@ -22,7 +22,7 @@ public class InteractionDataSetting extends ConfigSetting<InteractiveData> {
         super.setValue(data);
     }
 
-    public static class Builder extends ConfigSettingBuilder<InteractiveData, InteractionDataSetting, Builder> {
+    public static class Builder extends ConfigSettingBuilder<InteractiveData, InteractiveDataSetting, Builder> {
 
         public Builder(String name, InteractiveData defaultValue, String path) {
             super(name, defaultValue, path);
@@ -34,8 +34,8 @@ public class InteractionDataSetting extends ConfigSetting<InteractiveData> {
         }
 
         @Override
-        public InteractionDataSetting build() {
-            return new InteractionDataSetting(super.getName(), super.getDefaultValue(), super.getValue(), super.getFilter(), super.getPath());
+        public InteractiveDataSetting build() {
+            return new InteractiveDataSetting(super.getName(), super.getDefaultValue(), super.getValue(), super.getFilter(), super.getPath());
         }
     }
 }
