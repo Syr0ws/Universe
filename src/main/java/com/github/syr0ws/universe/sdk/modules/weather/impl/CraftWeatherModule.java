@@ -11,17 +11,21 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     private WeatherModel model;
     private WeatherService service;
 
+    public static final String MODULE_NAME = "WeatherModule";
+
     public CraftWeatherModule(Game game) {
         super(game);
     }
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         WeatherDAO dao = new ConfigWeatherDAO(this.getConfig());
 
@@ -34,13 +38,8 @@ public class CraftWeatherModule extends GameModule implements WeatherModule {
     }
 
     @Override
-    public void disable() {
-
-    }
-
-    @Override
     public String getName() {
-        return ModuleEnum.WEATHER_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

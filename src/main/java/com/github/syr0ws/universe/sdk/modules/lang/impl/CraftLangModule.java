@@ -17,6 +17,8 @@ public class CraftLangModule extends GameModule implements LangModule {
     private final LangModel model;
     private final LangService service;
 
+    public static final String MODULE_NAME = "LangModule";
+
     public CraftLangModule(Game game) {
         super(game);
 
@@ -27,11 +29,8 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void load() {
-    }
-
-    @Override
     public void enable() {
+        super.enable();
 
         FileConfiguration config = this.getConfig();
 
@@ -42,13 +41,8 @@ public class CraftLangModule extends GameModule implements LangModule {
     }
 
     @Override
-    public void disable() {
-
-    }
-
-    @Override
     public String getName() {
-        return ModuleEnum.LANG_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

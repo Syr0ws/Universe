@@ -12,31 +12,24 @@ public class CraftChatModule extends GameModule implements ChatModule {
 
     private final ChatModel model;
 
+    public static final String MODULE_NAME = "ChatModule";
+
     public CraftChatModule(Game game) {
         super(game);
         this.model = new CraftChatModel();
     }
 
     @Override
-    public void load() {
-
-    }
-
-    @Override
     public void enable() {
+        super.enable();
 
         ListenerManager manager = super.getListenerManager();
         manager.addListener(new ChatListener(this.model));
     }
 
     @Override
-    public void disable() {
-        super.getListenerManager().removeListeners();
-    }
-
-    @Override
     public String getName() {
-        return ModuleEnum.CHAT_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

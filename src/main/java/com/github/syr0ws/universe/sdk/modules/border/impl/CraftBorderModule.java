@@ -13,17 +13,21 @@ public class CraftBorderModule extends GameModule implements BorderModule {
     private BorderModel model;
     private BorderService service;
 
+    public static final String MODULE_NAME = "BorderModule";
+
     public CraftBorderModule(Game game) {
         super(game);
     }
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         this.model = new CraftBorderModel();
 
@@ -34,13 +38,8 @@ public class CraftBorderModule extends GameModule implements BorderModule {
     }
 
     @Override
-    public void disable() {
-
-    }
-
-    @Override
     public String getName() {
-        return ModuleEnum.BORDER_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

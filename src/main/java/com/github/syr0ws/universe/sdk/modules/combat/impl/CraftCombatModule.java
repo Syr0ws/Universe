@@ -12,6 +12,8 @@ import com.github.syr0ws.universe.sdk.modules.combat.settings.CraftCombatSetting
 
 public class CraftCombatModule extends GameModule implements CombatModule {
 
+    public static final String MODULE_NAME = "CombatModule";
+
     private final CraftCombatModel model;
     private final CraftCombatService service;
     private final CraftCombatSettings settings;
@@ -28,11 +30,13 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public void load() {
+        super.load();
         super.loadConfig();
     }
 
     @Override
     public void enable() {
+        super.enable();
 
         // Handling settings.
         this.settings.init(super.getGame().getConfig());
@@ -47,10 +51,7 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public void disable() {
-
-        // Handling listeners.
-        ListenerManager listenerManager = super.getListenerManager();
-        listenerManager.removeListeners();
+        super.disable();
 
         // Handling task.
         this.task.stop();
@@ -58,7 +59,7 @@ public class CraftCombatModule extends GameModule implements CombatModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.COMBAT_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override

@@ -14,18 +14,16 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
     private final ViewService service;
 
+    public static final String MODULE_NAME = "ViewModule";
+
     public CraftViewModule(Game game) {
         super(game);
         this.service = new CraftViewService();
     }
 
     @Override
-    public void load() {
-
-    }
-
-    @Override
     public void enable() {
+        super.enable();
 
         // Registering handlers.
         this.registerHandlers();
@@ -36,6 +34,7 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
     @Override
     public void disable() {
+        super.disable();
 
         // Unregistering handlers.
         this.service.removeViewHandlers();
@@ -43,7 +42,7 @@ public class CraftViewModule extends GameModule implements ViewModule {
 
     @Override
     public String getName() {
-        return ModuleEnum.VIEW_MODULE.getName();
+        return MODULE_NAME;
     }
 
     @Override
