@@ -1,5 +1,6 @@
 package com.github.syr0ws.universe.sdk.game.settings.types;
 
+import com.github.syr0ws.universe.sdk.game.settings.types.builder.ConfigSettingBuilder;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class EnumSetting<E extends Enum<E>> extends ConfigSetting<Enum<E>> {
         super.setValue(enumValue);
     }
 
-    public static class Builder<E extends Enum<E>> extends ConfigSetting.Builder<Enum<E>> {
+    public static class Builder<E extends Enum<E>> extends ConfigSettingBuilder<Enum<E>, EnumSetting<E>, Builder<E>> {
 
         private final Class<E> clazz;
 
@@ -36,14 +37,13 @@ public class EnumSetting<E extends Enum<E>> extends ConfigSetting<Enum<E>> {
         }
 
         @Override
+        public Builder<E> self() {
+            return this;
+        }
+
+        @Override
         public EnumSetting<E> build() {
-            return new EnumSetting<>(
-                    super.getName(),
-                    super.getDefaultValue(),
-                    super.getValue(),
-                    this.clazz,
-                    super.getPath()
-            );
+            return new EnumSetting<>(super.getName(), super.getDefaultValue(), super.getValue(), this.clazz, super.getPath());
         }
     }
 }

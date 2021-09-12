@@ -2,6 +2,7 @@ package com.github.syr0ws.universe.sdk.game.settings.types;
 
 import com.github.syr0ws.universe.api.settings.SettingFilter;
 import com.github.syr0ws.universe.api.settings.SettingValidationException;
+import com.github.syr0ws.universe.sdk.game.settings.types.builder.MutableSettingBuilder;
 
 public class MutableSetting<T> extends AbstractSetting<T> implements com.github.syr0ws.universe.api.settings.MutableSetting<T> {
 
@@ -47,47 +48,20 @@ public class MutableSetting<T> extends AbstractSetting<T> implements com.github.
         return this.value;
     }
 
-    public static class Builder<T> {
-
-        private final String name;
-        private final T defaultValue;
-
-        private T value;
-        private SettingFilter<T> filter;
+    public static class Builder<T> extends MutableSettingBuilder<T, MutableSetting<T>, Builder<T>> {
 
         public Builder(String name, T defaultValue) {
-            this.name = name;
-            this.defaultValue = defaultValue;
+            super(name, defaultValue);
         }
 
-        public Builder<T> withValue(T value) {
-            this.value = value;
+        @Override
+        public Builder<T> self() {
             return this;
         }
 
-        public Builder<T> withFilter(SettingFilter<T> filter) {
-            this.filter = filter;
-            return this;
-        }
-
+        @Override
         public MutableSetting<T> build() {
-            return new MutableSetting<>(this.name, this.defaultValue, this.value, this.filter);
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public T getDefaultValue() {
-            return this.defaultValue;
-        }
-
-        public T getValue() {
-            return this.value;
-        }
-
-        public SettingFilter<T> getFilter() {
-            return this.filter;
+            return new MutableSetting<>(super.getName(), super.getDefaultValue(), super.getValue(), super.getFilter());
         }
     }
 }

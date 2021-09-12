@@ -2,6 +2,7 @@ package com.github.syr0ws.universe.sdk.game.settings.types;
 
 import com.github.syr0ws.universe.api.settings.SettingFilter;
 import com.github.syr0ws.universe.sdk.game.settings.config.Configurable;
+import org.bukkit.configuration.ConfigurationSection;
 
 public abstract class ConfigSetting<T> extends MutableSetting<T> implements Configurable {
 
@@ -12,21 +13,9 @@ public abstract class ConfigSetting<T> extends MutableSetting<T> implements Conf
         this.path = path;
     }
 
+    public abstract void read(ConfigurationSection section);
+
     public String getPath() {
         return this.path;
-    }
-
-    public static abstract class Builder<T> extends MutableSetting.Builder<T> {
-
-        private final String path;
-
-        public Builder(String name, T defaultValue, String path) {
-            super(name, defaultValue);
-            this.path = path;
-        }
-
-        public String getPath() {
-            return this.path;
-        }
     }
 }

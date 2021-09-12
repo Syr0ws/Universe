@@ -1,6 +1,7 @@
 package com.github.syr0ws.universe.sdk.game.settings.types;
 
 import com.github.syr0ws.universe.api.settings.SettingFilter;
+import com.github.syr0ws.universe.sdk.game.settings.types.builder.ConfigSettingBuilder;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -28,21 +29,20 @@ public class MaterialSetting extends ConfigSetting<List<Material>>  {
         super.setValue(materials);
     }
 
-    public static class Builder extends ConfigSetting.Builder<List<Material>> {
+    public static class Builder extends ConfigSettingBuilder<List<Material>, MaterialSetting, Builder> {
 
         public Builder(String name, List<Material> defaultValue, String path) {
             super(name, defaultValue, path);
         }
 
         @Override
+        public Builder self() {
+            return this;
+        }
+
+        @Override
         public MaterialSetting build() {
-            return new MaterialSetting(
-                    super.getName(),
-                    super.getDefaultValue(),
-                    super.getValue(),
-                    super.getFilter(),
-                    super.getPath()
-            );
+            return new MaterialSetting(super.getName(), super.getDefaultValue(), super.getValue(), super.getFilter(), super.getPath());
         }
     }
 }
